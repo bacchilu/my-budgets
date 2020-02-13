@@ -12,7 +12,17 @@ const BudgetCard = function (props) {
             <div className="card" style={{margin: '10px'}}>
                 <div className="card-header">
                     {budget['name']} <sub>{Utils.toCurrency(budget['weekly_budget'])}</sub>
-                    <span className="float-right"><strong><em>{Utils.toCurrency(budget['amount'])}</em></strong></span>
+                    <span className="float-right">
+                        <form className="form-inline">
+                            <strong style={{marginRight: '1em'}}><em>{Utils.toCurrency(budget['amount'])}</em></strong>
+                            <div className="dropdown">
+                                <button className="btn btn-sm btn-outline-secondary" type="button" data-toggle="dropdown">⚙</button>
+                                <div className="dropdown-menu dropdown-menu-right">
+                                    <button className="dropdown-item">TODO</button><button className="dropdown-item">TODO</button>
+                                </div>
+                            </div>
+                        </form>
+                    </span>
                 </div>
                 <div className="card-body">
                     {/*<Progress.Bar weekly_budget={budget['weekly_budget']} weekly_amount={budget['weekly_amount']} />*/}
