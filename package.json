@@ -6,7 +6,8 @@
   "scripts": {
     "watch": "webpack --watch",
     "build": "webpack",
-    "deploy": "webpack --config webpack.prod.js"
+    "deploy": "webpack --config webpack.prod.js",
+    "upload": "surge public"
   },
   "author": "Luca Bacchi <bacchilu@gmail.com> (http://www.lucabacchi.it)",
   "license": "ISC",
@@ -36,7 +37,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "firebase": "^7.8.1",
+    "firebase": "^7.8.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   }
