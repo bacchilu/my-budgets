@@ -1,7 +1,6 @@
 const React = require('react');
 
 const Utils = require('./utils.js');
-const Progress = require('./progress.js');
 
 
 const BudgetCard = function (props) {
@@ -18,15 +17,14 @@ const BudgetCard = function (props) {
                             <div className="dropdown">
                                 <button className="btn btn-sm btn-outline-secondary" type="button" data-toggle="dropdown">⚙</button>
                                 <div className="dropdown-menu dropdown-menu-right">
-                                    <button className="dropdown-item">TODO</button><button className="dropdown-item">TODO</button>
+                                    <button className="dropdown-item" onClick={(e)=>{e.preventDefault()}}>TODO</button>
+                                    <button className="dropdown-item" onClick={(e)=>{e.preventDefault()}}>TODO</button>
                                 </div>
                             </div>
                         </form>
                     </span>
                 </div>
                 <div className="card-body">
-                    {/*<Progress.Bar weekly_budget={budget['weekly_budget']} weekly_amount={budget['weekly_amount']} />*/}
-                    <Progress.BarTot amount={budget['amount']} weekly_budget={budget['weekly_budget']} weekly_amount={budget['weekly_amount']} />
                     <p style={{marginTop: '4px'}}>
                         <span className="card-subtitle mb-2 text-muted">{Utils.toCurrency(budget['weekly_amount'])}</span>
                         <button className="btn btn-outline-primary float-right" onClick={props.spend}>Add cost</button>
