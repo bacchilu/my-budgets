@@ -39,7 +39,8 @@ const Modal = function ({budget, ...props}) {
                             <input ref={inputEl} type="number" step="0.01" className="form-control" value={value} onChange={onChange} required/>
                             <small className="form-text text-muted">Il tuo budget è {Utils.toCurrency(budget['amount'])}</small>
                         </div>
-                        <Progress.BarTot amount={budget['amount']} weekly_budget={budget['weekly_budget']} weekly_amount={budget['weekly_amount']} />
+                        {/*<Progress.BarTot amount={budget['amount']} weekly_budget={budget['weekly_budget']} weekly_amount={budget['weekly_amount']} />*/}
+                        <Progress.Bar amount={budget['amount']} weekly_amount={budget['weekly_amount']} />
                     </div>
                     <div className="modal-footer"><button type="submit" className="btn btn-outline-primary">Sure!</button></div>
                 </form>

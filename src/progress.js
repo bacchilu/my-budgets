@@ -8,11 +8,9 @@ const getPercData = function (value, total) {
 };
 
 
-const Bar = function (props) {
-    const total = props['weekly_budget'];
-
-    const v = Math.max(0, total - props['weekly_amount']);
-    const p = getPercData(v, total);
+const Bar = function ({amount, weekly_amount}) {
+    const v = Math.max(0, amount - weekly_amount);
+    const p = getPercData(v, amount);
 
     return <div className="progress"><div className="progress-bar" style={{width: `${p}%`}}>{Utils.toCurrency(v)}</div></div>;
 };

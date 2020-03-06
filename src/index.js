@@ -101,7 +101,8 @@ const App = function (props) {
                 </form>
             </nav>
             <div className="container">
-                <div style={{marginTop: '4px'}}><Progress.BarTot amount={total} weekly_budget={totalWeeklyBudget} weekly_amount={totalWeeklyAmount} /></div>
+                {/*<div style={{marginTop: '4px'}}><Progress.BarTot amount={total} weekly_budget={totalWeeklyBudget} weekly_amount={totalWeeklyAmount} /></div>*/}
+                <div style={{marginTop: '4px'}}><Progress.Bar amount={total} weekly_amount={totalWeeklyAmount} /></div>
                 <div className="row">{items}</div>
             </div>
             <div style={{position: 'fixed', bottom: '0px', right: '0px', display: 'none'}} className="spinner-grow" role="status">
