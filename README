@@ -11,6 +11,9 @@ nauseating-rainstorm.surge.sh
 
 https://favicon.io/favicon-generator/
 
+    cd public
+    python3 -m http.server
+
 
 TODO: creazione e cancellazione budget
 
