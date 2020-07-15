@@ -8,6 +8,7 @@ const BudgetCard = require('./budget_card.js');
 const OptionsButton = require('./options_button.js');
 const Progress = require('./progress.js');
 const reducer = require('./reducer.js');
+const Observers = require('./observers.js');
 
 
 const getMethods = function (dispatch) {
@@ -105,9 +106,7 @@ const App = function (props) {
                 <div style={{marginTop: '4px'}}><Progress.Bar amount={total} weekly_amount={totalWeeklyAmount} /></div>
                 <div className="row">{items}</div>
             </div>
-            <div style={{position: 'fixed', bottom: '0px', right: '0px', display: 'none'}} className="spinner-grow" role="status">
-                <span className="sr-only">Loading...</span>
-            </div>
+            <Observers.Loading />
         </React.Fragment>
     );
 };

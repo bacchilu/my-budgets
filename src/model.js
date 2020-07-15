@@ -20,18 +20,46 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 
+const Emitter = new (require('events'))();
+
+const RunningManager = (function () {
+    let isRunning = 0;
+    return {
+        on: function (cb) {
+            Emitter.on('running_event', cb);
+        },
+        off : function (cb) {
+            Emitter.removeListener('running_event', cb);
+        },
+        set: function (value) {
+            isRunning += value ? 1 : -1;
+            Emitter.emit('running_event');
+        },
+        isRunning: function () {
+            return isRunning > 0;
+        }
+    };
+})();
+
+
 const getBudgets = function () {
+    RunningManager.set(true);
     return db.collection('budgets').orderBy('createdAt').get().then(function (querySnapshot) {
         return querySnapshot.docs.map(function (item) {
             return {id: item.id, ...item.data()};
         });
+    }).finally(function () {
+        RunningManager.set(false);
     });
 };
 
 
 const updateBudget = function (id, amount, weekly_amount) {
-    db.collection('budgets').doc(id).set({amount: amount, weekly_amount: weekly_amount}, {merge: true});
+    RunningManager.set(true);
+    db.collection('budgets').doc(id).set({amount: amount, weekly_amount: weekly_amount}, {merge: true}).finally(function () {
+        RunningManager.set(false);
+    });
 };
 
 
-module.exports = {getBudgets, updateBudget};
+module.exports = {getBudgets, updateBudget, RunningManager};
