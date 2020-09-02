@@ -1,4 +1,4 @@
-module.exports = function (budgets, action) {
+const reducer = function (budgets, action) {
     if (action['type'] === 'INIT')
         return [...action['value']];
     if (action['type'] === 'SPEND') {
@@ -22,3 +22,23 @@ module.exports = function (budgets, action) {
     }
     throw new Error();
 };
+
+
+const getMethods = function (dispatch) {
+    return {
+        init: function (budgets) {
+            dispatch({type: 'INIT', value: budgets});
+        },
+        recharge: function (budget) {
+            dispatch({type: 'RECHARGE', id: budget['id']});
+            Model.updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
+        },
+        spend: function (budget, value) {
+            dispatch({type: 'SPEND', value: value, id: budget['id']});
+            Model.updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
+        }
+    };
+};
+
+
+module.exports = {reducer, getMethods};

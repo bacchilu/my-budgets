@@ -7,30 +7,13 @@ const Modal = require('./modal');
 const BudgetCard = require('./budget_card.js');
 const OptionsButton = require('./options_button.js');
 const Progress = require('./progress.js');
-const reducer = require('./reducer.js');
+const Reducer = require('./reducer.js');
 const Observers = require('./observers.js');
 
 
-const getMethods = function (dispatch) {
-    return {
-        init: function (budgets) {
-            dispatch({type: 'INIT', value: budgets});
-        },
-        recharge: function (budget) {
-            dispatch({type: 'RECHARGE', id: budget['id']});
-            Model.updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
-        },
-        spend: function (budget, value) {
-            dispatch({type: 'SPEND', value: value, id: budget['id']});
-            Model.updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
-        }
-    };
-};
-
-
 const App = function (props) {
-    const [budgets, dispatch] = React.useReducer(reducer, null);
-    const Methods = getMethods(dispatch);
+    const [budgets, dispatch] = React.useReducer(Reducer.reducer, null);
+    const Methods = Reducer.getMethods(dispatch);
 
     const [error, setError] = React.useState(null);
     React.useEffect(function () {
