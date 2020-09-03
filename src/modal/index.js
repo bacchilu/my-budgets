@@ -1,45 +1,53 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
 
-const Body = require('./body.js');
 
-
-const Modal = (function () {
+const Parent = (function () {
     const div = document.createElement('div');
     div.setAttribute('class', 'modal fade');
     div.setAttribute('tabindex', '-1');
     div.setAttribute('role', 'dialog');
     div.setAttribute('aria-hidden', 'true');
+    const contentDiv = document.createElement('div');
+    contentDiv.setAttribute('class', 'modal-dialog');
+    contentDiv.setAttribute('role', 'document');
+    div.appendChild(contentDiv);
     document.body.appendChild(div);
 
+    $(div).on('hidden.bs.modal', function (e) {
+        ReactDOM.render(null, contentDiv);
+    });
+
     const hide = function () {
-        ReactDOM.render(null, div, function () {
+        ReactDOM.render(null, contentDiv, function () {
             $(div).modal('hide');
         });
     };
 
-    $(div).on('hidden.bs.modal', function (e) {
-        ReactDOM.render(null, div);
-    });
-
-    return {
-        open: function (budget, action) {
-            ReactDOM.render(<Body.Modal budget={budget} hide={hide} action={action} />, div, function () {
-                $(div).modal({backdrop: 'static'});
-            });
-        },
-        confirm: function (message, cb) {
-            const action = function (value) {
-                if (value)
-                    cb();
-                hide();
-            };
-            ReactDOM.render(<Body.Confirm message={message} action={action} />, div, function () {
-                $(div).modal({backdrop: 'static'});
-            });
-        }
+    const render = function (Component, params) {
+        ReactDOM.render(<Component hide={hide} {...params} />, contentDiv, function () {
+            $(div).modal({backdrop: 'static'});
+        });
     };
+
+    return {render};
 })();
 
 
-module.exports = Modal;
+const Body = require('./body.js');
+
+
+const open = function (budget, action) {
+    Parent.render(Body.Modal, {budget, action});
+};
+
+const confirm = function (message, cb) {
+    const action = function (value) {
+        if (value)
+            cb();
+    };
+    Parent.render(Body.Confirm, {message, action});
+};
+
+
+module.exports = {open, confirm};
