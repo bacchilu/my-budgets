@@ -1,3 +1,6 @@
+const Model = require('./model.js');
+
+
 const reducer = function (budgets, action) {
     if (action['type'] === 'INIT')
         return [...action['value']];
