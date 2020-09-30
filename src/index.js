@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom');
 
 const Utils = require('./utils.js');
 const Model = require('./model.js');
-const Modal = require('./modal');
+const Modal = require('./modal.js');
 const BudgetCard = require('./budget_card.js');
 const OptionsButton = require('./options_button.js');
 const Progress = require('./progress.js');

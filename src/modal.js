@@ -1,10 +1,12 @@
 const React = require('react');
 
-const Utils = require('../utils.js');
-const Progress = require('../progress.js');
+const Modal = require('./libs/modal.js');
+
+const Utils = require('./utils.js');
+const Progress = require('./progress.js');
 
 
-const Modal = function ({budget, ...props}) {
+const Budget = function ({budget, ...props}) {
     const [value, setValue] = React.useState('');
     const onChange = function (e) {
         setValue(e.target.value);
@@ -69,4 +71,18 @@ const Confirm = function ({message, ...props}) {
 };
 
 
-module.exports = {Modal, Confirm};
+const open = function (budget, action) {
+    Modal.render(Budget, {budget, action});
+};
+
+
+const confirm = function (message, cb) {
+    const action = function (value) {
+        if (value)
+            cb();
+    };
+    Modal.render(Confirm, {message, action});
+};
+
+
+module.exports = {open, confirm};

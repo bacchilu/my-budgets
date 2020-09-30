@@ -1,3 +1,32 @@
+// const Confirm = function ({message, ...props}) {
+//     const action = function (value) {
+//         return function () {
+//             props.action(value);
+//             props.hide();
+//         };
+//     };
+//
+//     return (
+//         <div className="modal-content">
+//             <div className="modal-header"><h5 className="modal-title">Confirm</h5></div>
+//             <div className="modal-body">{message}</div>
+//             <div className="modal-footer" style={{display: 'block'}}>
+//                 <button className="btn btn-outline-danger float-left" onClick={action(false)}>No</button>
+//                 <button className="btn btn-outline-primary float-right" onClick={action(true)}>Sì</button>
+//             </div>
+//         </div>
+//     );
+// };
+//
+//
+// const confirm = function (message, cb) {
+//     const action = function (value) {
+//         if (value)
+//             cb();
+//     };
+//     Modal.render(Confirm, {message, action});
+// };
+
 const React = require('react');
 const ReactDOM = require('react-dom');
 
@@ -34,20 +63,4 @@ const Parent = (function () {
 })();
 
 
-const Body = require('./body.js');
-
-
-const open = function (budget, action) {
-    Parent.render(Body.Modal, {budget, action});
-};
-
-const confirm = function (message, cb) {
-    const action = function (value) {
-        if (value)
-            cb();
-    };
-    Parent.render(Body.Confirm, {message, action});
-};
-
-
-module.exports = {open, confirm};
+module.exports = Parent;
