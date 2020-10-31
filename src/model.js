@@ -22,7 +22,7 @@ const db = firebase.firestore();
 
 const Emitter = new (require('events'))();
 
-const RunningManager = (function () {
+export const RunningManager = (function () {
     let isRunning = 0;
     return {
         on: function (cb) {
@@ -42,7 +42,7 @@ const RunningManager = (function () {
 })();
 
 
-const getBudgets = function () {
+export const getBudgets = function () {
     RunningManager.set(true);
     return db.collection('budgets').orderBy('createdAt').get().then(function (querySnapshot) {
         return querySnapshot.docs.map(function (item) {
@@ -54,12 +54,9 @@ const getBudgets = function () {
 };
 
 
-const updateBudget = function (id, amount, weekly_amount) {
+export const updateBudget = function (id, amount, weekly_amount) {
     RunningManager.set(true);
     db.collection('budgets').doc(id).set({amount: amount, weekly_amount: weekly_amount}, {merge: true}).finally(function () {
         RunningManager.set(false);
     });
 };
-
-
-module.exports = {getBudgets, updateBudget, RunningManager};
