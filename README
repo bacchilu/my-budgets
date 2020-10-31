@@ -11,6 +11,14 @@ nauseating-rainstorm.surge.sh
 
 https://favicon.io/favicon-generator/
 
+---
+# Docker
+
+    docker build -t bacchilu .
+    docker run --rm -it -v `pwd`:/home/bacchilu/dev -p 8000:8000 bacchilu
+
+---
+
     cd public
     python3 -m http.server
 
