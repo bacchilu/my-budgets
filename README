@@ -5,7 +5,9 @@ https://zeit.co/
 
 https://surge.sh/
 https://github.com/sintaxi/surge
-npx surge public
+
+DEPLOY:
+    npx surge public
 
 nauseating-rainstorm.surge.sh
 

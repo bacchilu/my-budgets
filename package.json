@@ -28,16 +28,16 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
     "babel-loader": "^8.1.0",
     "surge": "^0.21.6",
-    "webpack": "^4.43.0",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "firebase": "^7.16.0",
+    "firebase": "^7.21.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

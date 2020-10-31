@@ -3,12 +3,14 @@ const React = require('react');
 const Utils = require('./utils.js');
 
 
-const BudgetCard = function (props) {
-    const budget = props['budget'];
+const BudgetCard = function ({budget, ...props}) {
+    let cls = 'secondary';
+    if (['FU1kyNdZcqyujwS9dbQr', '4o9hh1CwqJuAUmlvDF8V'].includes(budget['id']))
+        cls = 'success';
 
     return (
         <div key={budget['id']} className="col-sm-6">
-            <div className="card" style={{margin: '10px'}}>
+            <div className={`card border-${cls}`} style={{margin: '10px'}}>
                 <div className="card-header">
                     {budget['name']} <sub>{Utils.toCurrency(budget['weekly_budget'])}</sub>
                     <span className="float-right">
