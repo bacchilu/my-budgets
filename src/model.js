@@ -1,7 +1,7 @@
-const firebase = require('firebase/app');
+import firebase from 'firebase/app';
 
 // require('firebase/auth');
-require('firebase/firestore');
+import 'firebase/firestore';
 
 
 const firebaseConfig = {

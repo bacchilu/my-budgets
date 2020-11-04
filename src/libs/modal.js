@@ -27,8 +27,9 @@
 //     Modal.render(Confirm, {message, action});
 // };
 
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+
+import ReactDOM from 'react-dom';
 
 
 const Parent = (function () {
@@ -63,4 +64,4 @@ const Parent = (function () {
 })();
 
 
-module.exports = Parent;
+export default Parent;

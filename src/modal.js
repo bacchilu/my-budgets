@@ -1,6 +1,5 @@
-const React = require("react");
-
-const Modal = require("./libs/modal.js");
+import React from 'react';
+import Modal from './libs/modal.js';
 
 import * as Utils from "./utils.js";
 import * as Progress from "./progress.js";

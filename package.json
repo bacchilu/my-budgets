@@ -10,37 +10,17 @@
         "upgrade": "ncu -u",
         "upload": "surge public"
     },
-    "prettier": {
-        "arrowParens": "always",
-        "bracketSpacing": false,
-        "embeddedLanguageFormatting": "auto",
-        "htmlWhitespaceSensitivity": "css",
-        "insertPragma": false,
-        "jsxBracketSameLine": false,
-        "jsxSingleQuote": false,
-        "printWidth": 120,
-        "proseWrap": "preserve",
-        "quoteProps": "as-needed",
-        "requirePragma": false,
-        "semi": true,
-        "singleQuote": true,
-        "tabWidth": 4,
-        "trailingComma": "es5",
-        "useTabs": false,
-        "vueIndentScriptAndStyle": false
-    },
     "author": "Luca Bacchi <bacchilu@gmail.com> (http://www.lucabacchi.it)",
     "license": "ISC",
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@babel/preset-env": "^7.12.1",
-        "@babel/preset-react": "^7.12.1",
+        "@babel/preset-react": "^7.12.5",
         "babel-loader": "^8.1.0",
         "surge": "^0.21.6",
-        "webpack": "^5.3.2",
+        "webpack": "^5.4.0",
         "webpack-cli": "^4.1.0",
-        "babel-plugin-transform-commonjs-es2015-modules": "^4.0.1",
-        "npm-check-updates": "^9.2.3"
+        "npm-check-updates": "^9.2.4"
     },
     "dependencies": {
         "core-js": "^3.6.5",

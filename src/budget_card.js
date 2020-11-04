@@ -1,4 +1,4 @@
-const React = require("react");
+import React from 'react';
 
 import * as Utils from "./utils.js";
 
@@ -64,4 +64,4 @@ export default function ({ budget, ...props }) {
       </div>
     </div>
   );
-};
+}

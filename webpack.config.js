@@ -35,7 +35,7 @@ module.exports = function (env) {
                 ],
                 ["@babel/preset-react"],
               ],
-              plugins: ["transform-commonjs-es2015-modules"],
+              plugins: [],
             },
           },
         },

@@ -1,4 +1,4 @@
-const React = require("react");
+import React from 'react';
 
 export default function (props) {
   const onClick = function (e) {
@@ -29,4 +29,4 @@ export default function (props) {
       </div>
     </div>
   );
-};
+}
