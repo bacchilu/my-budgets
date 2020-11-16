@@ -1,22 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as Utils from './utils.js';
-import * as Model from './model.js';
-import * as Modal from './modal.js';
-import BudgetCard from './budget_card.js';
-import OptionsButton from './options_button.js';
-import * as Progress from './progress.js';
-import * as Reducer from './reducer.js';
-import * as Observers from './observers.js';
+import {toCurrency} from './utils.js';
+import {getBudgets} from './model.js';
+import {confirm, open} from './modal.js';
+import {BudgetCard} from './budget_card.js';
+import {OptionsButton} from './options_button.js';
+import {Bar} from './progress.js';
+import {reducer, getMethods} from './reducer.js';
+import {Loading} from './observers.js';
 
 const App = function (props) {
-    const [budgets, dispatch] = React.useReducer(Reducer.reducer, null);
-    const Methods = Reducer.getMethods(dispatch);
+    const [budgets, dispatch] = React.useReducer(reducer, null);
+    const Methods = getMethods(dispatch);
 
     const [error, setError] = React.useState(null);
     React.useEffect(function () {
-        Model.getBudgets()
+        getBudgets()
             .then(function (budgets) {
                 Methods.init(budgets);
             })
@@ -53,7 +53,7 @@ const App = function (props) {
         );
 
     const rechargeAll = function () {
-        Modal.confirm(`Sicuro di voler ricaricare tutti i budget?`, function () {
+        confirm(`Sicuro di voler ricaricare tutti i budget?`, function () {
             budgets.forEach(function (budget, index) {
                 Methods.recharge(budget);
             });
@@ -72,12 +72,12 @@ const App = function (props) {
 
     const items = budgets.map(function (budget) {
         const spend = function () {
-            Modal.open(budget, function (value) {
+            open(budget, function (value) {
                 Methods.spend(budget, value);
             });
         };
         const recharge = function () {
-            Modal.confirm(`Sicuro di voler ricaricare ${Utils.toCurrency(budget['weekly_budget'])}?`, function () {
+            confirm(`Sicuro di voler ricaricare ${toCurrency(budget['weekly_budget'])}?`, function () {
                 Methods.recharge(budget);
             });
         };
@@ -88,25 +88,25 @@ const App = function (props) {
         <React.Fragment>
             <nav className="navbar navbar-light bg-light">
                 <span className="navbar-brand mb-0 h1">
-                    My Budgets <sub>{Utils.toCurrency(totalWeeklyBudget)}</sub>
+                    My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
                 </span>
                 <form className="form-inline">
                     <span className="navbar-text" style={{marginRight: '20px'}}>
                         <strong>
-                            <em>{Utils.toCurrency(total)}</em>
+                            <em>{toCurrency(total)}</em>
                         </strong>
                     </span>
                     <OptionsButton rechargeAll={rechargeAll} />
                 </form>
             </nav>
             <div className="container">
-                {/*<div style={{marginTop: '4px'}}><Progress.BarTot amount={total} weekly_budget={totalWeeklyBudget} weekly_amount={totalWeeklyAmount} /></div>*/}
+                {/*<div style={{marginTop: '4px'}}><BarTot amount={total} weekly_budget={totalWeeklyBudget} weekly_amount={totalWeeklyAmount} /></div>*/}
                 <div style={{marginTop: '4px'}}>
-                    <Progress.Bar amount={total} weekly_amount={totalWeeklyAmount} />
+                    <Bar amount={total} weekly_amount={totalWeeklyAmount} />
                 </div>
                 <div className="row">{items}</div>
             </div>
-            <Observers.Loading />
+            <Loading />
         </React.Fragment>
     );
 };

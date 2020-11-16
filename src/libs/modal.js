@@ -31,8 +31,7 @@ import React from 'react';
 
 import ReactDOM from 'react-dom';
 
-
-const Parent = (function () {
+export const Parent = (function () {
     const div = document.createElement('div');
     div.setAttribute('class', 'modal fade');
     div.setAttribute('tabindex', '-1');
@@ -62,6 +61,3 @@ const Parent = (function () {
 
     return {render};
 })();
-
-
-export default Parent;
