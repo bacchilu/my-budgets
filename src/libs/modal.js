@@ -43,19 +43,21 @@ export const Parent = (function () {
     div.appendChild(contentDiv);
     document.body.appendChild(div);
 
-    $(div).on('hidden.bs.modal', function (e) {
+    const myModal = new bootstrap.Modal(div, {});
+
+    div.addEventListener('hidden.bs.modal', function (e) {
         ReactDOM.render(null, contentDiv);
     });
 
     const hide = function () {
         ReactDOM.render(null, contentDiv, function () {
-            $(div).modal('hide');
+            myModal.hide();
         });
     };
 
     const render = function (Component, params) {
         ReactDOM.render(<Component hide={hide} {...params} />, contentDiv, function () {
-            $(div).modal({backdrop: 'static'});
+            myModal.show();
         });
     };
 

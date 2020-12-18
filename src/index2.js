@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {toCurrency} from './utils.js';
 import {getBudgets} from './model.js';
-// import {confirm, open} from './modal.js';
+import {confirm, open} from './modal.js';
 import {BudgetCard} from './budget_card.js';
 import {OptionsButton} from './options_button.js';
 import {Bar} from './progress.js';
@@ -25,23 +25,23 @@ const App = function (props) {
             });
     }, []);
 
-    // if (error !== null)
-    //     return (
-    //         <React.Fragment>
-    //             <nav className="navbar navbar-light bg-light">
-    //                 <span className="navbar-brand mb-0 h1">My Budgets</span>
-    //             </nav>
-    //             <div className="container">
-    //                 <div style={{marginTop: '10px'}} className="alert alert-danger" role="alert">
-    //                     <p>Errore nel caricamento dei budget!</p>
-    //                     <hr />
-    //                     <p>
-    //                         <em>{error.message}</em>
-    //                     </p>
-    //                 </div>
-    //             </div>
-    //         </React.Fragment>
-    //     );
+    if (error !== null)
+        return (
+            <React.Fragment>
+                <nav className="navbar navbar-light bg-light">
+                    <span className="navbar-brand mb-0 h1">My Budgets</span>
+                </nav>
+                <div className="container">
+                    <div style={{marginTop: '10px'}} className="alert alert-danger" role="alert">
+                        <p>Errore nel caricamento dei budget!</p>
+                        <hr />
+                        <p>
+                            <em>{error.message}</em>
+                        </p>
+                    </div>
+                </div>
+            </React.Fragment>
+        );
 
     if (budgets === null)
         return (

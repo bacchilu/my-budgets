@@ -11,20 +11,21 @@ export const BudgetCard = function ({budget, ...props}) {
             <div className={`card border-${cls}`} style={{margin: '10px'}}>
                 <div className="card-header">
                     {budget['name']} <sub>{toCurrency(budget['weekly_budget'])}</sub>
-                    <span className="float-right">
-                        <form className="form-inline">
-                            <strong style={{marginRight: '1em'}}>
+                    <span className="float-end">
+                        <form className="row row-cols-auto align-items-center">
+                            <strong>
                                 <em>{toCurrency(budget['amount'])}</em>
                             </strong>
                             <div className="dropdown">
                                 <button
-                                    className="btn btn-sm btn-outline-secondary"
+                                    className="btn btn-sm btn-outline-secondary dropdown-toggle"
                                     type="button"
-                                    data-toggle="dropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
                                 >
                                     ⚙
                                 </button>
-                                <div className="dropdown-menu dropdown-menu-right">
+                                <div className="dropdown-menu dropdown-menu-end">
                                     <button
                                         className="dropdown-item"
                                         onClick={(e) => {
@@ -49,7 +50,7 @@ export const BudgetCard = function ({budget, ...props}) {
                 <div className="card-body">
                     <p style={{marginTop: '4px'}}>
                         <span className="card-subtitle mb-2 text-muted">{toCurrency(budget['weekly_amount'])}</span>
-                        <button className="btn btn-outline-primary float-right" onClick={props.spend}>
+                        <button className="btn btn-outline-primary float-end" onClick={props.spend}>
                             Add cost
                         </button>
                     </p>

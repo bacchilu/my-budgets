@@ -12,10 +12,15 @@ export const OptionsButton = function (props) {
 
     return (
         <div className="dropdown">
-            <button className="btn btn-outline-secondary" type="button" data-toggle="dropdown">
+            <button
+                className="btn btn-outline-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
                 ⚙
             </button>
-            <div className="dropdown-menu dropdown-menu-right">
+            <div className="dropdown-menu dropdown-menu-end">
                 <button className="dropdown-item" onClick={onClick}>
                     New Budget
                 </button>
