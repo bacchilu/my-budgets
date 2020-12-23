@@ -47,7 +47,7 @@ const App = function (props) {
         return (
             <div style={{marginTop: '50px'}} className="d-flex justify-content-center">
                 <div style={{width: '3rem', height: '3rem'}} className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
+                    <span className="visually-hidden">Loading...</span>
                 </div>
             </div>
         );
@@ -86,21 +86,22 @@ const App = function (props) {
 
     return (
         <React.Fragment>
-            <nav className="navbar navbar-light bg-light">
-                <span className="navbar-brand mb-0 h1">
-                    My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
-                </span>
-                <form className="form-inline">
-                    <span className="navbar-text" style={{marginRight: '20px'}}>
-                        <strong>
-                            <em>{toCurrency(total)}</em>
-                        </strong>
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <div className="container-fluid">
+                    <span className="navbar-brand">
+                        My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
                     </span>
-                    <OptionsButton rechargeAll={rechargeAll} />
-                </form>
+                    <form className="d-flex">
+                        <span className="navbar-text" style={{marginRight: '20px'}}>
+                            <strong>
+                                <em>{toCurrency(total)}</em>
+                            </strong>
+                        </span>
+                        <OptionsButton rechargeAll={rechargeAll} />
+                    </form>
+                </div>
             </nav>
             <div className="container">
-                {/*<div style={{marginTop: '4px'}}><BarTot amount={total} weekly_budget={totalWeeklyBudget} weekly_amount={totalWeeklyAmount} /></div>*/}
                 <div style={{marginTop: '4px'}}>
                     <Bar amount={total} weekly_amount={totalWeeklyAmount} />
                 </div>
