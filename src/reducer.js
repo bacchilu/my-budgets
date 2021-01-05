@@ -1,4 +1,4 @@
-import {updateBudget} from './model.js';
+import {updateBudget} from './model';
 
 export const reducer = function (budgets, action) {
     if (action['type'] === 'INIT') return [...action['value']];

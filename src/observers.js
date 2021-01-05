@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {RunningManager} from './model.js';
+import {RunningManager} from './model';
 
 export const Loading = function (props) {
     const [isRunning, setIsRunning] = React.useState(RunningManager.isRunning());

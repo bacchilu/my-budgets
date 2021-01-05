@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import {toCurrency} from './utils.js';
-import {getBudgets} from './model.js';
+import {getBudgets} from './model';
 import {confirm, open} from './modal.js';
 import {BudgetCard} from './budget_card.js';
 import {OptionsButton} from './options_button.js';
