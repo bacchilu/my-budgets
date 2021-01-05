@@ -1,7 +1,5 @@
 import firebase from 'firebase/app';
-
 import 'firebase/auth';
-
 import 'firebase/firestore';
 
 const firebaseConfig = {
@@ -13,30 +11,29 @@ const firebaseConfig = {
     messagingSenderId: '1067130269246',
     appId: '1:1067130269246:web:504d76c1afc05bcbf12b6f',
 };
-
 firebase.initializeApp(firebaseConfig);
 
-// const provider = new firebase.auth.GoogleAuthProvider();
-// firebase
-//     .auth()
-//     .signInWithPopup(provider)
-//     .then(function (result) {
-//         // This gives you a Google Access Token. You can use it to access the Google API.
-//         const token = result.credential.accessToken;
-//         // The signed-in user info.
-//         const user = result.user;
-//         console.log(user);
-//     })
-//     .catch(function (error) {
-//         // Handle Errors here.
-//         const errorCode = error.code;
-//         const errorMessage = error.message;
-//         // The email of the user's account used.
-//         const email = error.email;
-//         // The firebase.auth.AuthCredential type that was used.
-//         const credential = error.credential;
-//         // ...
-//     });
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        console.log(user['displayName'], user['email'], user['photoURL']);
+        // firebase.auth().signOut();
+    } else {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({prompt: 'select_account'});
+        firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function (result) {
+                const user = result.user;
+                console.log(user['displayName'], user['email'], user['photoURL']);
+            })
+            .catch(function (error) {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+            });
+    }
+});
 
 const db = firebase.firestore();
 
