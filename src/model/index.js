@@ -1,5 +1,4 @@
 import firebase from 'firebase/app';
-import 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyBvHCpKNrfKfc2AZZLP8D0K1AGlUFcX1aE',
@@ -12,30 +11,15 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        console.log(user['displayName'], user['email'], user['photoURL']);
-        // firebase.auth().signOut();
-    } else {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({prompt: 'select_account'});
-        firebase
-            .auth()
-            .signInWithPopup(provider)
-            .then(function (result) {
-                const user = result.user;
-                console.log(user['displayName'], user['email'], user['photoURL']);
-            })
-            .catch(function (error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-            });
-    }
-});
+import {Auth} from './auth.js';
 
-export {RunningManager} from './firestore';
-import {FireStore} from './firestore';
+const auth = Auth(firebase);
+export const signIn = auth.signIn;
+export const signOut = auth.signOut;
+export const onAuthStateChanged = auth.onAuthStateChanged;
+
+export {RunningManager} from './firestore.js';
+import {FireStore} from './firestore.js';
 
 const fs = FireStore(firebase);
 export const getBudgets = fs.getBudgets;

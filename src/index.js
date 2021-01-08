@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {toCurrency} from './utils.js';
+import {toCurrency, useUser, Login} from './utils.js';
 import {getBudgets} from './model';
 import {confirm, open} from './modal.js';
 import {BudgetCard} from './budget_card.js';
 import {OptionsButton} from './options_button.js';
 import {Bar} from './progress.js';
-import {reducer, getMethods} from './reducer.js';
+import {useMethods} from './reducer.js';
 import {Loading} from './observers.js';
 
 const App = function (props) {
-    const [budgets, dispatch] = React.useReducer(reducer, null);
-    const Methods = getMethods(dispatch);
-
+    const [budgets, Methods] = useMethods();
     const [error, setError] = React.useState(null);
     React.useEffect(function () {
         getBudgets()
@@ -24,6 +22,7 @@ const App = function (props) {
                 setError(e);
             });
     }, []);
+    const user = useUser();
 
     if (error !== null)
         return (
@@ -92,6 +91,9 @@ const App = function (props) {
                         My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
                     </span>
                     <form className="d-flex">
+                        <span className="navbar-text" style={{marginRight: '10px'}}>
+                            <Login user={user} />
+                        </span>
                         <span className="navbar-text" style={{marginRight: '20px'}}>
                             <strong>
                                 <em>{toCurrency(total)}</em>

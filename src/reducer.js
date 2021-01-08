@@ -1,6 +1,8 @@
+import React from 'react';
+
 import {updateBudget} from './model';
 
-export const reducer = function (budgets, action) {
+const reducer = function (budgets, action) {
     if (action['type'] === 'INIT') return [...action['value']];
     if (action['type'] === 'SPEND') {
         const index = budgets.findIndex(function (budget) {
@@ -32,7 +34,7 @@ export const reducer = function (budgets, action) {
     throw new Error();
 };
 
-export const getMethods = function (dispatch) {
+const getMethods = function (dispatch) {
     return {
         init: function (budgets) {
             dispatch({type: 'INIT', value: budgets});
@@ -46,4 +48,10 @@ export const getMethods = function (dispatch) {
             updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
         },
     };
+};
+
+export const useMethods = function () {
+    const [budgets, dispatch] = React.useReducer(reducer, null);
+    const Methods = getMethods(dispatch);
+    return [budgets, Methods];
 };
