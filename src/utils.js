@@ -28,12 +28,12 @@ export const Login = function ({user}) {
     };
 
     return user !== null ? (
-        <a href="#" onClick={logout}>
-            <em>{user['displayName']}</em>
-        </a>
+        <button className="btn btn-outline-danger" onClick={logout}>
+            <i className="bi bi-box-arrow-in-left"></i> <em>{user['displayName']}</em>
+        </button>
     ) : (
-        <a href="#" onClick={login}>
-            <em>Login</em>
-        </a>
+        <button className="btn btn-outline-success" onClick={login}>
+            <i className="bi bi-box-arrow-in-right"></i>
+        </button>
     );
 };

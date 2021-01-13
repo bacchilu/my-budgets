@@ -5,7 +5,7 @@ import {toCurrency, useUser, Login} from './utils.js';
 import {getBudgets} from './model';
 import {confirm, open} from './modal.js';
 import {BudgetCard} from './budget_card.js';
-import {OptionsButton} from './options_button.js';
+// import {OptionsButton} from './options_button.js';
 import {Bar} from './progress.js';
 import {useMethods} from './reducer.js';
 import {Loading} from './observers.js';
@@ -85,7 +85,7 @@ const App = function (props) {
 
     return (
         <React.Fragment>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <span className="navbar-brand">
                         My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
@@ -102,8 +102,50 @@ const App = function (props) {
                         <OptionsButton rechargeAll={rechargeAll} />
                     </form>
                 </div>
+            </nav> */}
+            <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div className="container-fluid">
+                    <span className="navbar-brand">
+                        My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
+                    </span>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarCollapse">
+                        <ul className="navbar-nav me-auto mb-2 mb-md-0">
+                            <li className="nav-item">
+                                <a
+                                    className="nav-link"
+                                    href="#"
+                                    onClick={function (e) {
+                                        e.preventDefault();
+                                        rechargeAll();
+                                    }}
+                                >
+                                    Recharge all
+                                </a>
+                            </li>
+                            <li className="nav-item">
+                                <a className="nav-link disabled" href="#" aria-disabled="true">
+                                    New budget
+                                </a>
+                            </li>
+                        </ul>
+                        <form className="d-flex">
+                            <Login user={user} />
+                        </form>
+                    </div>
+                </div>
             </nav>
-            <div className="container">
+            <div className="container" style={{paddingTop: '4em'}}>
                 <div style={{marginTop: '4px'}}>
                     <Bar amount={total} weekly_amount={totalWeeklyAmount} />
                 </div>
