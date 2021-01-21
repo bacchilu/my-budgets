@@ -24,6 +24,10 @@ https://favicon.io/favicon-generator/
     cd public
     python3 -m http.server
 
+TODO
+Implementare il fatto che se non sono autenticato, mi chiede di farlo.
+Implementare la regola lato firebase
+Inserire l'utente nei document
 
 TODO: creazione e cancellazione budget
 
