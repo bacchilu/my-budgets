@@ -10,6 +10,44 @@ import {Bar} from './progress.js';
 import {useMethods} from './reducer.js';
 import {Loading} from './observers.js';
 
+const ErrorPage = function ({user, error}) {
+    return (
+        <React.Fragment>
+            <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+                <div className="container-fluid">
+                    <span className="navbar-brand">My Budgets</span>
+                    <button
+                        className="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse"
+                        aria-controls="navbarCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                    <div className="collapse navbar-collapse" id="navbarCollapse">
+                        <ul className="navbar-nav me-auto mb-2 mb-md-0"></ul>
+                        <form className="d-flex">
+                            <Login user={user} />
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <div className="container">
+                <div style={{marginTop: '10px'}} className="alert alert-danger" role="alert">
+                    <p>Errore nel caricamento dei budget!</p>
+                    <hr />
+                    <p>
+                        <em>{error.message}</em>
+                    </p>
+                </div>
+            </div>
+        </React.Fragment>
+    );
+};
+
 const App = function (props) {
     const [budgets, Methods] = useMethods();
     const [error, setError] = React.useState(null);
@@ -24,23 +62,11 @@ const App = function (props) {
     }, []);
     const user = useUser();
 
-    if (error !== null)
-        return (
-            <React.Fragment>
-                <nav className="navbar navbar-light bg-light">
-                    <span className="navbar-brand mb-0 h1">My Budgets</span>
-                </nav>
-                <div className="container">
-                    <div style={{marginTop: '10px'}} className="alert alert-danger" role="alert">
-                        <p>Errore nel caricamento dei budget!</p>
-                        <hr />
-                        <p>
-                            <em>{error.message}</em>
-                        </p>
-                    </div>
-                </div>
-            </React.Fragment>
-        );
+    // Implementare anche una pagina in cui si chiede di autenticarsi, se non lo si è già.
+    // Regola:
+    // allow read, write: if request.auth != null && request.time < timestamp.date(2021, 2, 9);
+
+    if (error !== null) return <ErrorPage user={user} error={error} />;
 
     if (budgets === null)
         return (
@@ -85,24 +111,6 @@ const App = function (props) {
 
     return (
         <React.Fragment>
-            {/* <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <div className="container-fluid">
-                    <span className="navbar-brand">
-                        My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
-                    </span>
-                    <form className="d-flex">
-                        <span className="navbar-text" style={{marginRight: '10px'}}>
-                            <Login user={user} />
-                        </span>
-                        <span className="navbar-text" style={{marginRight: '20px'}}>
-                            <strong>
-                                <em>{toCurrency(total)}</em>
-                            </strong>
-                        </span>
-                        <OptionsButton rechargeAll={rechargeAll} />
-                    </form>
-                </div>
-            </nav> */}
             <nav className="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
                 <div className="container-fluid">
                     <span className="navbar-brand">
