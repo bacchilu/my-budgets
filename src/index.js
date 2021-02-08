@@ -4,12 +4,6 @@ import ReactDOM from 'react-dom';
 import {useUser, Spinner, EmptyNavbar} from './utils.js';
 import {MainPage} from './main';
 
-// Sicurezza:
-// - Pagina in cui si richiede autenticazione; DONE
-// - Regola sull mettere in sicurezza il Firestore; DONE
-//       allow read, write: if request.auth != null && request.time < timestamp.date(2021, 2, 9)
-// - https://firebase.google.com/docs/firestore/security/rules-conditions
-
 const App = function (props) {
     const user = useUser();
 
