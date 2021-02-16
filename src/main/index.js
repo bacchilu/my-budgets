@@ -31,7 +31,7 @@ export const MainPage = function ({user}) {
     const [error, setError] = React.useState(null);
     React.useEffect(async function () {
         try {
-            const budgets = await getBudgets();
+            const budgets = await getBudgets(user);
             Methods.init(budgets);
         } catch (e) {
             setError(e);

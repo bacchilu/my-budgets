@@ -1,3 +1,15 @@
+// https://firebase.google.com/docs/firestore/security/rules-query
+// https://firebase.google.com/docs/firestore/security/rules-conditions
+
+// rules_version = '2';
+// service cloud.firestore {
+//   match /databases/{database}/documents {
+//     match /budgets/{budget} {
+//       allow read, write: if request.auth != null && request.auth.uid == resource.data.uid;
+//     }
+//   }
+// }
+
 import 'firebase/firestore';
 
 const Emitter = new (require('events'))();
@@ -25,10 +37,11 @@ export const FireStore = function (firebase) {
     const db = firebase.firestore();
 
     return {
-        getBudgets: function () {
+        getBudgets: function (user) {
             RunningManager.set(true);
             return db
                 .collection('budgets')
+                .where('uid', '==', user.uid)
                 .orderBy('createdAt')
                 .get()
                 .then(function (querySnapshot) {
