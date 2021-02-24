@@ -3,12 +3,9 @@ import React from 'react';
 import {toCurrency} from './utils.js';
 
 export const BudgetCard = function ({budget, ...props}) {
-    let cls = 'secondary';
-    if (['FU1kyNdZcqyujwS9dbQr', '4o9hh1CwqJuAUmlvDF8V'].includes(budget['id'])) cls = 'success';
-
     return (
         <div key={budget['id']} className="col-sm-6">
-            <div className={`card border-${cls}`} style={{margin: '10px'}}>
+            <div className="card border-secondary" style={{margin: '10px'}}>
                 <div className="card-header">
                     {budget['name']} <sub>{toCurrency(budget['weekly_budget'])}</sub>
                     <span className="float-end">

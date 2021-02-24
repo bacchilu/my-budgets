@@ -60,6 +60,7 @@ export const MainPage = function ({user}) {
                 Methods.recharge(budget);
             });
         };
+
         return <BudgetCard key={budget['id']} budget={budget} spend={spend} recharge={recharge} />;
     });
 

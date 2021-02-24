@@ -9,10 +9,6 @@ module.exports = function (env) {
             filename: '[name].js',
             path: path.resolve(__dirname, 'public'),
         },
-
-        // // I need this to use "exceljs"
-        // node: {fs: "empty"},
-
         module: {
             rules: [
                 {
@@ -29,7 +25,7 @@ module.exports = function (env) {
                                         useBuiltIns: 'usage',
                                         corejs: 3,
                                         targets: {
-                                            browsers: [/*"> 5%", "last 2 versions"*/ 'defaults'],
+                                            browsers: ['defaults'],
                                         },
                                     },
                                 ],
@@ -46,14 +42,7 @@ module.exports = function (env) {
         res['mode'] = 'development';
         res['devtool'] = 'inline-source-map';
     }
-    if (env.production) {
-        res['mode'] = 'production';
-        // res['plugins'] = [
-        //     new (require('webpack')).DefinePlugin({
-        //         'process.env.NODE_ENV': JSON.stringify('production')
-        //     })
-        // ];
-    }
+    if (env.production) res['mode'] = 'production';
 
     return res;
 };
