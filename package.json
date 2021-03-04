@@ -6,8 +6,7 @@
     "scripts": {
         "update": "ncu -u",
         "watch": "webpack --env development --config webpack.config.js --watch",
-        "build": "webpack --env production --config webpack.config.js",
-        "deploy": "surge public"
+        "build": "webpack --env production --config webpack.config.js"
     },
     "author": "Luca Bacchi <bacchilu@gmail.com> (http://www.lucabacchi.it)",
     "license": "ISC",
@@ -16,7 +15,6 @@
         "@babel/preset-env": "^7.13.9",
         "@babel/preset-react": "^7.12.13",
         "babel-loader": "^8.2.2",
-        "surge": "^0.21.7",
         "webpack": "^5.24.3",
         "webpack-cli": "^4.5.0",
         "npm-check-updates": "^11.1.10"

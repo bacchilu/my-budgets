@@ -1,45 +1,5 @@
-back4app.com
-
-https://time2hack.com/ways-to-host-single-page-application-spa-static-site-for-free/
-https://zeit.co/
-
-https://surge.sh/
-https://github.com/sintaxi/surge
-
-DEPLOY:
-    npx surge public
-
-nauseating-rainstorm.surge.sh
-
-https://favicon.io/favicon-generator/
-
----
-# Docker
-
-    docker build -t bacchilu .
-    docker run --rm -it -v `pwd`:/home/bacchilu/dev -p 8000:8000 bacchilu
-
----
-
-    cd public
-    python3 -m http.server
-
-TODO
-Implementare il fatto che se non sono autenticato, mi chiede di farlo.
-Implementare la regola lato firebase
-Inserire l'utente nei document
-
-TODO: creazione e cancellazione budget
-
-TODO: Spinner chiamate Ajax in fondo pagina
-
-TODO: Bottoni con caricamento
-
-TODO: autenticazione
-
-TODO: creare progetto su bitbucket
-
-TODO: undo
+# my-budgets
+A Simple App to manage my budgets.
 
 ## TODO
-https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/
+- TODO
