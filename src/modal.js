@@ -60,10 +60,3 @@ const Budget = function ({budget, ...props}) {
 export const open = function (budget, action) {
     Parent.render(Budget, {budget, action});
 };
-
-export const confirm = function (message, cb) {
-    const action = function () {
-        cb();
-    };
-    Parent.render(Confirm, {message, action});
-};

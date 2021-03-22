@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {toCurrency, Login, Spinner, EmptyNavbar} from '../utils.js';
+import {Spinner, EmptyNavbar} from '../utils.js';
 import {getBudgets} from '../model';
-import {confirm, open} from '../modal.js';
+import {open} from '../modal.js';
 import {BudgetCard} from '../budget_card.js';
 import {Bar} from '../progress.js';
 import {useMethods} from '../reducer.js';
@@ -56,9 +56,9 @@ export const MainPage = function ({user}) {
             });
         };
         const recharge = function () {
-            confirm(`Sicuro di voler ricaricare ${toCurrency(budget['weekly_budget'])}?`, function () {
-                Methods.recharge(budget);
-            });
+            // confirm(`Sicuro di voler ricaricare ${toCurrency(budget['weekly_budget'])}?`, function () {
+            //     Methods.recharge(budget);
+            // });
         };
 
         return <BudgetCard key={budget['id']} budget={budget} spend={spend} recharge={recharge} />;
