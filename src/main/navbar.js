@@ -1,25 +1,41 @@
 import React from 'react';
 
 import {toCurrency, Login} from '../utils.js';
-import {confirm} from '../modal.js';
 import {Modal} from '../libs/modal.js';
+
+const Confirm = function ({opened, setOpened, action}) {
+    const onClick = function () {
+        action();
+        setOpened(false);
+    };
+
+    return (
+        <Modal opened={opened} setOpened={setOpened}>
+            <div className="modal-header">
+                <h5 className="modal-title">Confirm</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">Sicuro di voler ricaricare tutti i budget?</div>
+            <div className="modal-footer" style={{display: 'block'}}>
+                <button className="btn btn-outline-danger float-end" onClick={onClick}>
+                    Ok
+                </button>
+            </div>
+        </Modal>
+    );
+};
 
 export const NavBar = function ({user, budgets, Methods}) {
     const [modalOpened, setModalOpened] = React.useState(false);
 
     const rechargeAll = function () {
-        confirm(`Sicuro di voler ricaricare tutti i budget?`, function () {
-            budgets.forEach(function (budget, index) {
-                Methods.recharge(budget);
-            });
+        budgets.forEach(function (budget) {
+            Methods.recharge(budget);
         });
     };
 
-    const showModalTest = function () {
+    const confirmRechargeAll = function () {
         setModalOpened(true);
-    };
-    const hideModalTest = function () {
-        setModalOpened(false);
     };
 
     const totalWeeklyBudget = budgets.reduce(function (acc, item) {
@@ -28,23 +44,7 @@ export const NavBar = function ({user, budgets, Methods}) {
 
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-            <Modal opened={modalOpened} setOpened={setModalOpened}>
-                <div className="modal-header">
-                    <h5 className="modal-title">TEST MODAL</h5>
-                    <button className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                    <p>TODO</p>
-                </div>
-                <div className="modal-footer">
-                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="button" className="btn btn-primary" onClick={hideModalTest}>
-                        Save changes
-                    </button>
-                </div>
-            </Modal>
+            <Confirm opened={modalOpened} setOpened={setModalOpened} action={rechargeAll} />
             <div className="container-fluid">
                 <span className="navbar-brand">
                     My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
@@ -68,7 +68,7 @@ export const NavBar = function ({user, budgets, Methods}) {
                                 href="#"
                                 onClick={function (e) {
                                     e.preventDefault();
-                                    rechargeAll();
+                                    confirmRechargeAll();
                                 }}
                             >
                                 Recharge all
@@ -77,18 +77,6 @@ export const NavBar = function ({user, budgets, Methods}) {
                         <li className="nav-item">
                             <a className="nav-link disabled" href="#" aria-disabled="true">
                                 New budget
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a
-                                className="nav-link"
-                                href="#"
-                                onClick={function (e) {
-                                    e.preventDefault();
-                                    showModalTest();
-                                }}
-                            >
-                                Modal Test
                             </a>
                         </li>
                     </ul>
