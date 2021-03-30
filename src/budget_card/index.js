@@ -1,15 +1,21 @@
 import React from 'react';
 
-import {toCurrency} from './utils.js';
-import {open} from './modal.js';
+import {toCurrency} from '../utils.js';
+import {Modal} from '../libs/modal.js';
+import {BudgetModal} from './modal.js';
 
 export const BudgetCard = function ({budget, spend}) {
+    const [modalOpened, setModalOpened] = React.useState(false);
+
     const onClick = function () {
-        open(budget, spend);
+        setModalOpened(true);
     };
 
     return (
         <div key={budget['id']} className="col-sm-6">
+            <Modal opened={modalOpened} setOpened={setModalOpened}>
+                <BudgetModal setOpened={setModalOpened} budget={budget} action={spend} />
+            </Modal>
             <div className="card border-secondary" style={{margin: '10px'}}>
                 <div className="card-header">
                     {budget['name']} <sub>{toCurrency(budget['weekly_budget'])}</sub>

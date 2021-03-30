@@ -2,7 +2,7 @@ import React from 'react';
 
 import {Spinner, EmptyNavbar} from '../utils.js';
 import {getBudgets} from '../model';
-import {BudgetCard} from '../budget_card.js';
+import {BudgetCard} from '../budget_card';
 import {Bar} from '../progress.js';
 import {useMethods} from '../reducer.js';
 import {Loading} from '../observers.js';
