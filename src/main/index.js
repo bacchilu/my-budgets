@@ -2,7 +2,6 @@ import React from 'react';
 
 import {Spinner, EmptyNavbar} from '../utils.js';
 import {getBudgets} from '../model';
-import {open} from '../modal.js';
 import {BudgetCard} from '../budget_card.js';
 import {Bar} from '../progress.js';
 import {useMethods} from '../reducer.js';
@@ -50,10 +49,8 @@ export const MainPage = function ({user}) {
     }, 0);
 
     const items = budgets.map(function (budget) {
-        const spend = function () {
-            open(budget, function (value) {
-                Methods.spend(budget, value);
-            });
+        const spend = function (value) {
+            Methods.spend(budget, value);
         };
         const recharge = function () {
             // confirm(`Sicuro di voler ricaricare ${toCurrency(budget['weekly_budget'])}?`, function () {

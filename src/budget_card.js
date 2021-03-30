@@ -1,8 +1,13 @@
 import React from 'react';
 
 import {toCurrency} from './utils.js';
+import {open} from './modal.js';
 
-export const BudgetCard = function ({budget, ...props}) {
+export const BudgetCard = function ({budget, spend}) {
+    const onClick = function () {
+        open(budget, spend);
+    };
+
     return (
         <div key={budget['id']} className="col-sm-6">
             <div className="card border-secondary" style={{margin: '10px'}}>
@@ -47,7 +52,7 @@ export const BudgetCard = function ({budget, ...props}) {
                 <div className="card-body">
                     <p style={{marginTop: '4px'}}>
                         <span className="card-subtitle mb-2 text-muted">{toCurrency(budget['weekly_amount'])}</span>
-                        <button className="btn btn-outline-primary float-end" onClick={props.spend}>
+                        <button className="btn btn-outline-primary float-end" onClick={onClick}>
                             Add cost
                         </button>
                     </p>
