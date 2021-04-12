@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Spinner, EmptyNavbar} from '../utils.js';
-import {getBudgets} from '../model';
+import {getBudgets, useBudgets} from '../model';
 import {BudgetCard} from '../budget_card';
 import {Bar} from '../progress.js';
 import {useMethods} from '../reducer.js';
@@ -37,6 +37,10 @@ export const MainPage = function ({user}) {
         }
     }, []);
 
+    // const {data: budgets2, error: budgets_error, mutate} = useBudgets(user.uid);
+    // if (budgets_error !== undefined) return <ErrorPage user={user} error={budgets_error} />;
+    // if (budgets2 === undefined) return <Spinner />;
+
     if (error !== null) return <ErrorPage user={user} error={error} />;
 
     if (budgets === null) return <Spinner />;
@@ -51,14 +55,21 @@ export const MainPage = function ({user}) {
     const items = budgets.map(function (budget) {
         const spend = function (value) {
             Methods.spend(budget, value);
-        };
-        const recharge = function () {
-            // confirm(`Sicuro di voler ricaricare ${toCurrency(budget['weekly_budget'])}?`, function () {
-            //     Methods.recharge(budget);
-            // });
+            // mutate(
+            //     budgets2.map(function (b) {
+            //         return budget.id === b.id
+            //             ? {
+            //                   ...budget,
+            //                   amount: budget['amount'] - value,
+            //                   weekly_amount: budget['weekly_amount'] + value,
+            //               }
+            //             : b;
+            //     }),
+            //     false
+            // );
         };
 
-        return <BudgetCard key={budget['id']} budget={budget} spend={spend} recharge={recharge} />;
+        return <BudgetCard key={budget['id']} budget={budget} spend={spend} />;
     });
 
     return (

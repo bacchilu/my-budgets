@@ -25,13 +25,11 @@ const fs = FireStore(firebase);
 export const getBudgets = fs.getBudgets;
 export const updateBudget = fs.updateBudget;
 
-// import useSWR from 'swr';
+import useSWR from 'swr';
 
-// const useBudgets = function (uid) {
-//     const {data, error} = useSWR(['budgets', uid], function (key, uid) {
-//         console.assert(key === 'budgets');
-//         return fs.getBudgets({uid});
-//     });
-
-//     return {data, error};
-// };
+export const useBudgets = function (uid) {
+    return useSWR(['budgets', uid], function (key, uid) {
+        console.assert(key === 'budgets');
+        return fs.getBudgets({uid});
+    });
+};
