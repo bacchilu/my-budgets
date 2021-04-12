@@ -48,7 +48,7 @@ export const Spinner = function (props) {
     );
 };
 
-export const EmptyNavbar = function ({user}) {
+export const EmptyNavbar = function (props) {
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
@@ -67,7 +67,7 @@ export const EmptyNavbar = function ({user}) {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav me-auto mb-2 mb-md-0"></ul>
                     <form className="d-flex">
-                        <Login user={user} />
+                        <Login user={null} />
                     </form>
                 </div>
             </div>
