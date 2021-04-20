@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {updateBudget} from './model';
+import {getBudgets, updateBudget} from './model';
 
 const reducer = function (budgets, action) {
     if (action['type'] === 'INIT') return [...action['value']];
@@ -34,24 +34,33 @@ const reducer = function (budgets, action) {
     throw new Error();
 };
 
-const getMethods = function (dispatch) {
+export const useMethods = function (user) {
+    const [data, dispatch] = React.useReducer(reducer, null);
+    const [error, setError] = React.useState(null);
+    React.useEffect(
+        async function () {
+            try {
+                const budgets = await getBudgets(user);
+                dispatch({type: 'INIT', value: budgets});
+            } catch (e) {
+                setError(e);
+            }
+        },
+        [user]
+    );
+
     return {
-        init: function (budgets) {
-            dispatch({type: 'INIT', value: budgets});
-        },
-        recharge: function (budget) {
-            dispatch({type: 'RECHARGE', id: budget['id']});
-            updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
-        },
-        spend: function (budget, value) {
-            dispatch({type: 'SPEND', value: value, id: budget['id']});
-            updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
+        data,
+        error,
+        Methods: {
+            recharge: function (budget) {
+                dispatch({type: 'RECHARGE', id: budget['id']});
+                updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
+            },
+            spend: function (budget, value) {
+                dispatch({type: 'SPEND', value: value, id: budget['id']});
+                updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
+            },
         },
     };
-};
-
-export const useMethods = function () {
-    const [budgets, dispatch] = React.useReducer(reducer, null);
-    const Methods = getMethods(dispatch);
-    return [budgets, Methods];
 };

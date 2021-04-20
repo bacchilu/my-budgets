@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {Spinner, EmptyNavbar} from '../utils.js';
-import {getBudgets, useBudgets} from '../model';
+import {useMethods} from '../reducer.js';
+import {useBudgets} from '../model';
 import {BudgetCard} from '../budget_card';
 import {Bar} from '../progress.js';
-import {useMethods} from '../reducer.js';
 import {Loading} from '../observers.js';
 import {NavBar} from './navbar.js';
 
@@ -26,20 +26,12 @@ const ErrorPage = function ({user, error}) {
 };
 
 export const MainPage = function ({user}) {
-    const [budgets, Methods] = useMethods();
-    const [error, setError] = React.useState(null);
-    React.useEffect(async function () {
-        try {
-            const budgets = await getBudgets(user);
-            Methods.init(budgets);
-        } catch (e) {
-            setError(e);
-        }
-    }, []);
+    const {data: budgets, error, Methods} = useMethods(user);
 
-    // const {data: budgets2, error: budgets_error, mutate} = useBudgets(user.uid);
+    // const {data: budgets2, error: budgets_error, Methods: Methods2} = useBudgets(user);
     // if (budgets_error !== undefined) return <ErrorPage user={user} error={budgets_error} />;
     // if (budgets2 === undefined) return <Spinner />;
+    // console.log(budgets2);
 
     if (error !== null) return <ErrorPage user={user} error={error} />;
 
@@ -55,18 +47,7 @@ export const MainPage = function ({user}) {
     const items = budgets.map(function (budget) {
         const spend = function (value) {
             Methods.spend(budget, value);
-            // mutate(
-            //     budgets2.map(function (b) {
-            //         return budget.id === b.id
-            //             ? {
-            //                   ...budget,
-            //                   amount: budget['amount'] - value,
-            //                   weekly_amount: budget['weekly_amount'] + value,
-            //               }
-            //             : b;
-            //     }),
-            //     false
-            // );
+            // Methods2.spend(budget, value);
         };
 
         return <BudgetCard key={budget['id']} budget={budget} spend={spend} />;

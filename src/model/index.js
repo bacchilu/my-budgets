@@ -27,9 +27,32 @@ export const updateBudget = fs.updateBudget;
 
 import useSWR from 'swr';
 
-export const useBudgets = function (uid) {
-    return useSWR(['budgets', uid], function (key, uid) {
+export const useBudgets = function (user) {
+    const {data, error, mutate} = useSWR(['budgets', user.uid], function (key, uid) {
         console.assert(key === 'budgets');
         return fs.getBudgets({uid});
     });
+
+    return {
+        data,
+        error,
+        Methods: {
+            spend: async function (budget, value) {
+                mutate(
+                    data.map(function (b) {
+                        return budget.id === b.id
+                            ? {
+                                  ...budget,
+                                  amount: budget['amount'] - value,
+                                  weekly_amount: budget['weekly_amount'] + value,
+                              }
+                            : b;
+                    }),
+                    false
+                );
+                await updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
+                mutate();
+            },
+        },
+    };
 };

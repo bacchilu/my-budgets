@@ -55,7 +55,8 @@ export const FireStore = function (firebase) {
         },
         updateBudget: function (id, amount, weekly_amount) {
             RunningManager.set(true);
-            db.collection('budgets')
+            return db
+                .collection('budgets')
                 .doc(id)
                 .set({amount: amount, weekly_amount: weekly_amount}, {merge: true})
                 .finally(function () {
