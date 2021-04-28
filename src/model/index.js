@@ -32,6 +32,7 @@ export const useBudgets = function (user) {
         console.assert(key === 'budgets');
         return fs.getBudgets({uid});
     });
+    console.log(data);
 
     return {
         data,
@@ -54,14 +55,13 @@ export const useBudgets = function (user) {
                 mutate();
             },
             recharge: async function (budget) {
-                mutate(
-                    data.map(function (b) {
+                mutate(function (data) {
+                    return data.map(function (b) {
                         return budget.id === b.id
                             ? {...budget, amount: budget['amount'] + budget['weekly_budget'], weekly_amount: 0}
                             : b;
-                    }),
-                    false
-                );
+                    });
+                }, false);
                 await updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
                 mutate();
             },

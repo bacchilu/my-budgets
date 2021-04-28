@@ -26,8 +26,8 @@ const ErrorPage = function ({user, error}) {
 };
 
 export const MainPage = function ({user}) {
-    const {data, error, Methods} = useMethods(user);
-    // const {data, error, Methods} = useBudgets(user);
+    // const {data, error, Methods} = useMethods(user);
+    const {data, error, Methods} = useBudgets(user);
 
     if (error !== undefined) return <ErrorPage user={user} error={error} />;
     if (data === undefined) return <Spinner />;
