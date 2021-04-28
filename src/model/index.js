@@ -32,7 +32,6 @@ export const useBudgets = function (user) {
         console.assert(key === 'budgets');
         return fs.getBudgets({uid});
     });
-    console.log(data);
 
     return {
         data,
