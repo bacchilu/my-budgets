@@ -53,6 +53,18 @@ export const useBudgets = function (user) {
                 await updateBudget(budget['id'], budget['amount'] - value, budget['weekly_amount'] + value);
                 mutate();
             },
+            recharge: async function (budget) {
+                mutate(
+                    data.map(function (b) {
+                        return budget.id === b.id
+                            ? {...budget, amount: budget['amount'] + budget['weekly_budget'], weekly_amount: 0}
+                            : b;
+                    }),
+                    false
+                );
+                await updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
+                mutate();
+            },
         },
     };
 };

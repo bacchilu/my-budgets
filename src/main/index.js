@@ -26,28 +26,22 @@ const ErrorPage = function ({user, error}) {
 };
 
 export const MainPage = function ({user}) {
-    const {data: budgets, error, Methods} = useMethods(user);
+    const {data, error, Methods} = useMethods(user);
+    // const {data, error, Methods} = useBudgets(user);
 
-    // const {data: budgets2, error: budgets_error, Methods: Methods2} = useBudgets(user);
-    // if (budgets_error !== undefined) return <ErrorPage user={user} error={budgets_error} />;
-    // if (budgets2 === undefined) return <Spinner />;
-    // console.log(budgets2);
+    if (error !== undefined) return <ErrorPage user={user} error={error} />;
+    if (data === undefined) return <Spinner />;
 
-    if (error !== null) return <ErrorPage user={user} error={error} />;
-
-    if (budgets === null) return <Spinner />;
-
-    const total = budgets.reduce(function (acc, item) {
+    const total = data.reduce(function (acc, item) {
         return acc + item['amount'];
     }, 0);
-    const totalWeeklyAmount = budgets.reduce(function (acc, item) {
+    const totalWeeklyAmount = data.reduce(function (acc, item) {
         return acc + item['weekly_amount'];
     }, 0);
 
-    const items = budgets.map(function (budget) {
+    const items = data.map(function (budget) {
         const spend = function (value) {
             Methods.spend(budget, value);
-            // Methods2.spend(budget, value);
         };
 
         return <BudgetCard key={budget['id']} budget={budget} spend={spend} />;
@@ -55,7 +49,7 @@ export const MainPage = function ({user}) {
 
     return (
         <React.Fragment>
-            <NavBar user={user} budgets={budgets} Methods={Methods} />
+            <NavBar user={user} budgets={data} Methods={Methods} />
             <div className="container" style={{paddingTop: '1em'}}>
                 <div style={{marginTop: '4px'}}>
                     <Bar amount={total} weekly_amount={totalWeeklyAmount} />

@@ -35,8 +35,8 @@ const reducer = function (budgets, action) {
 };
 
 export const useMethods = function (user) {
-    const [data, dispatch] = React.useReducer(reducer, null);
-    const [error, setError] = React.useState(null);
+    const [data, dispatch] = React.useReducer(reducer, undefined);
+    const [error, setError] = React.useState(undefined);
     React.useEffect(
         async function () {
             try {
