@@ -37,7 +37,14 @@ const NewBudgetModal = function ({opened, setOpened, action}) {
                 <h5 className="modal-title">New Budget</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">TODO</div>
+            <div className="modal-body">
+                <form>
+                    <div className="form-floating mb-3">
+                        <input className="form-control" id="title" placeholder=" " />
+                        <label htmlFor="title">Budget name</label>
+                    </div>
+                </form>
+            </div>
             <div className="modal-footer" style={{display: 'block'}}>
                 <button className="btn btn-outline-danger float-end" onClick={onClick}>
                     Ok
