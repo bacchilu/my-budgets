@@ -26,20 +26,21 @@ export const BudgetModal = function ({setOpened, budget, action}) {
             </div>
             <form onSubmit={onSubmit}>
                 <div className="modal-body">
-                    <div className="form-group">
-                        <label>Quanto hai speso?</label>
+                    <div className="form-floating">
                         <input
                             ref={inputEl}
+                            id="floatingInput"
                             type="number"
-                            step="0.01"
                             className="form-control"
                             value={value}
+                            step="0.01"
                             onChange={onChange}
+                            placeholder="3.14"
                             required
                         />
-                        <small className="form-text text-muted">Il tuo budget è {toCurrency(budget['amount'])}</small>
+                        <label htmlFor="floatingInput">Quanto hai speso?</label>
                     </div>
-                    {/* <Bar amount={budget['amount']} weekly_amount={budget['weekly_amount']} /> */}
+                    <small className="form-text text-muted">Il tuo budget è {toCurrency(budget['amount'])}</small>
                 </div>
                 <div className="modal-footer">
                     <button type="submit" className="btn btn-outline-primary">
