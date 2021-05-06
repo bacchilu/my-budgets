@@ -1,8 +1,7 @@
 import React from 'react';
 
 import {Spinner, EmptyNavbar} from '../utils.js';
-import {useMethods} from '../reducer.js';
-import {useBudgets} from '../model';
+import {useBudgets} from '../budgets.js';
 import {BudgetCard} from '../budget_card';
 import {Bar} from '../progress.js';
 import {Loading} from '../observers.js';
@@ -26,7 +25,6 @@ const ErrorPage = function ({user, error}) {
 };
 
 export const MainPage = function ({user}) {
-    // const {data, error, Methods} = useMethods(user);
     const {data, error, Methods} = useBudgets(user);
 
     if (error !== undefined) return <ErrorPage user={user} error={error} />;
