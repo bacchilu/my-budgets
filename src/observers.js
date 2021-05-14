@@ -16,7 +16,7 @@ export const Loading = function (props) {
     if (!isRunning) return null;
     return (
         <div className="spinner-border" style={{position: 'fixed', bottom: '1em', right: '1em'}} role="status">
-            <span className="sr-only">Loading...</span>
+            <span className="visually-hidden">Loading...</span>
         </div>
     );
 };
