@@ -54,6 +54,7 @@ const NewBudgetModalBody = function ({action}) {
                             placeholder=" "
                             value={name}
                             onChange={onChange}
+                            required
                         />
                         <label>Budget name</label>
                     </div>
