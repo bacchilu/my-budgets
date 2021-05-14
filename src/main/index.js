@@ -4,7 +4,7 @@ import {Spinner, EmptyNavbar} from '../utils.js';
 import {useBudgets} from '../budgets.js';
 import {BudgetCard} from '../budget_card';
 import {Bar} from '../progress.js';
-import {Loading} from '../observers.js';
+import {GlobalSpinner} from '../global_spinner.js';
 import {NavBar} from './navbar.js';
 
 const ErrorPage = function ({user, error}) {
@@ -54,7 +54,7 @@ export const MainPage = function ({user}) {
                 </div>
                 <div className="row">{items}</div>
             </div>
-            <Loading />
+            <GlobalSpinner user={user} />
         </React.Fragment>
     );
 };
