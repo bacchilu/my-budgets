@@ -1,58 +1,7 @@
 import React from 'react';
 
 import {toCurrency, Login} from '../utils.js';
-import {Modal} from '../libs/modal.js';
-
-const RechargeAllModal = function ({opened, setOpened, action}) {
-    const onClick = function () {
-        action();
-        setOpened(false);
-    };
-
-    return (
-        <Modal opened={opened} setOpened={setOpened}>
-            <div className="modal-header">
-                <h5 className="modal-title">Recharge All</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">Sicuro di voler ricaricare tutti i budget?</div>
-            <div className="modal-footer" style={{display: 'block'}}>
-                <button className="btn btn-outline-danger float-end" onClick={onClick}>
-                    Ok
-                </button>
-            </div>
-        </Modal>
-    );
-};
-
-const NewBudgetModal = function ({opened, setOpened, action}) {
-    const onClick = function () {
-        action();
-        setOpened(false);
-    };
-
-    return (
-        <Modal opened={opened} setOpened={setOpened}>
-            <div className="modal-header">
-                <h5 className="modal-title">New Budget</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-                <form>
-                    <div className="form-floating mb-3">
-                        <input className="form-control" id="title" placeholder=" " />
-                        <label htmlFor="title">Budget name</label>
-                    </div>
-                </form>
-            </div>
-            <div className="modal-footer" style={{display: 'block'}}>
-                <button className="btn btn-outline-danger float-end" onClick={onClick}>
-                    Ok
-                </button>
-            </div>
-        </Modal>
-    );
-};
+import {RechargeAllModal, NewBudgetModal} from './modals.js';
 
 export const NavBar = function ({user, budgets, Methods}) {
     const [rechargeAllModalOpened, setRechargeAllModalOpened] = React.useState(false);
@@ -64,12 +13,16 @@ export const NavBar = function ({user, budgets, Methods}) {
         });
     };
 
-    const confirmRechargeAll = function (e) {
+    const newBudget = function (name) {
+        console.log(name);
+    };
+
+    const openModalRechargeAll = function (e) {
         e.preventDefault();
         setRechargeAllModalOpened(true);
     };
 
-    const newBudgetAction = function (e) {
+    const openModalNewBudget = function (e) {
         e.preventDefault();
         setNewBudgetModalOpened(true);
     };
@@ -85,7 +38,7 @@ export const NavBar = function ({user, budgets, Methods}) {
                 setOpened={setRechargeAllModalOpened}
                 action={rechargeAll}
             />
-            <NewBudgetModal opened={newBudgetModalOpened} setOpened={setNewBudgetModalOpened} action={function () {}} />
+            <NewBudgetModal opened={newBudgetModalOpened} setOpened={setNewBudgetModalOpened} action={newBudget} />
             <div className="container-fluid">
                 <span className="navbar-brand">
                     My Budgets <sub>{toCurrency(totalWeeklyBudget)}</sub>
@@ -104,12 +57,12 @@ export const NavBar = function ({user, budgets, Methods}) {
                 <div className="collapse navbar-collapse" id="navbarCollapse">
                     <ul className="navbar-nav me-auto mb-2 mb-md-0">
                         <li className="nav-item">
-                            <a className="nav-link" href="#" onClick={confirmRechargeAll}>
+                            <a className="nav-link" href="#" onClick={openModalRechargeAll}>
                                 Recharge all
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#" onClick={newBudgetAction}>
+                            <a className="nav-link" href="#" onClick={openModalNewBudget}>
                                 New budget
                             </a>
                         </li>
