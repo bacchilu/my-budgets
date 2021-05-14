@@ -18,7 +18,6 @@ export const signIn = auth.signIn;
 export const signOut = auth.signOut;
 export const onAuthStateChanged = auth.onAuthStateChanged;
 
-export {RunningManager} from './firestore.js';
 import {FireStore} from './firestore.js';
 
 const fs = FireStore(firebase);
