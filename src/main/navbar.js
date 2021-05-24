@@ -14,7 +14,7 @@ export const NavBar = function ({user, budgets, Methods}) {
     };
 
     const newBudget = function (newBudget) {
-        console.log(newBudget);
+        Methods.create(newBudget);
     };
 
     const openModalRechargeAll = function (e) {

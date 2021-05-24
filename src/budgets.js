@@ -40,6 +40,9 @@ export const useBudgets = function (user) {
                 await updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
                 mutate();
             },
+            create: function (budget) {
+                console.log('CREATE', budget);
+            },
         },
     };
 };
