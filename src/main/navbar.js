@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {toCurrency, Login} from '../utils.js';
-import {RechargeAllModal, NewBudgetModal} from './modals.js';
+import {toCurrency, Login} from '../utils';
+import {RechargeAllModal, NewBudgetModal} from './modals';
 
 export const NavBar = function ({user, budgets, Methods}) {
     const [rechargeAllModalOpened, setRechargeAllModalOpened] = React.useState(false);
@@ -13,8 +13,8 @@ export const NavBar = function ({user, budgets, Methods}) {
         });
     };
 
-    const newBudget = function (name) {
-        console.log(name);
+    const newBudget = function (newBudget) {
+        console.log(newBudget);
     };
 
     const openModalRechargeAll = function (e) {

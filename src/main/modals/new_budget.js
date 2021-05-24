@@ -1,28 +1,6 @@
 import React from 'react';
 
-import {Modal} from '../libs/modal.js';
-
-export const RechargeAllModal = function ({opened, setOpened, action}) {
-    const onClick = function () {
-        action();
-        setOpened(false);
-    };
-
-    return (
-        <Modal opened={opened} setOpened={setOpened}>
-            <div className="modal-header">
-                <h5 className="modal-title">Recharge All</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">Sicuro di voler ricaricare tutti i budget?</div>
-            <div className="modal-footer" style={{display: 'block'}}>
-                <button className="btn btn-outline-danger float-end" onClick={onClick}>
-                    Ok
-                </button>
-            </div>
-        </Modal>
-    );
-};
+import {Modal} from '../../libs/modal';
 
 const NewBudgetModalBody = function ({action}) {
     const inputEl = React.useRef(null);
@@ -30,13 +8,19 @@ const NewBudgetModalBody = function ({action}) {
         inputEl.current.focus();
     }, []);
     const [name, setName] = React.useState('');
+    const [description, setDescription] = React.useState('');
+    const [budget, setBudget] = React.useState('');
 
     const onSubmit = function (e) {
         e.preventDefault();
-        action(name);
+        action({name, description, budget});
     };
     const onChange = function (e) {
-        setName(e.target.value);
+        if (e.target.name === 'budget') setBudget(parseFloat(e.target.value));
+        else {
+            const set = {name: setName, description: setDescription}[e.target.name];
+            set(e.target.value);
+        }
     };
 
     return (
@@ -51,12 +35,39 @@ const NewBudgetModalBody = function ({action}) {
                         <input
                             ref={inputEl}
                             className="form-control"
+                            name="name"
                             placeholder=" "
                             value={name}
                             onChange={onChange}
                             required
                         />
-                        <label>Budget name</label>
+                        <label>Name</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <textarea
+                            className="form-control"
+                            name="description"
+                            rows="3"
+                            placeholder=" "
+                            style={{height: '100px'}}
+                            value={description}
+                            onChange={onChange}
+                        ></textarea>
+                        <label>Description</label>
+                    </div>
+                    <div className="form-floating mb-3">
+                        <input
+                            type="number"
+                            min="0.01"
+                            step="0.01"
+                            className="form-control"
+                            value={budget}
+                            onChange={onChange}
+                            name="budget"
+                            placeholder=" "
+                            required
+                        />
+                        <label>Budget</label>
                     </div>
                 </div>
                 <div className="modal-footer" style={{display: 'block'}}>
