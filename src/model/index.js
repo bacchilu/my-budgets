@@ -23,3 +23,4 @@ import {FireStore} from './firestore.js';
 const fs = FireStore(firebase);
 export const getBudgets = fs.getBudgets;
 export const updateBudget = fs.updateBudget;
+export const createBudget = fs.createBudget;

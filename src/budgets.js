@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import {getBudgets, updateBudget} from './model';
+import {getBudgets, updateBudget, createBudget} from './model';
 
 export const useBudgets = function (user) {
     const {data, error, isValidating, mutate} = useSWR(['budgets', user.uid], function (key, uid) {
@@ -40,8 +40,22 @@ export const useBudgets = function (user) {
                 await updateBudget(budget['id'], budget['amount'] + budget['weekly_budget'], 0);
                 mutate();
             },
-            create: function (budget) {
-                console.log('CREATE', budget);
+            create: async function (budget) {
+                mutate(
+                    [
+                        ...data,
+                        {
+                            amount: 0,
+                            id: 'temporary_id',
+                            name: `${budget.name} (${budget.description})`,
+                            weekly_amount: 0,
+                            weekly_budget: budget.budget,
+                        },
+                    ],
+                    false
+                );
+                await createBudget(`${budget.name} (${budget.description})`, budget.budget);
+                mutate();
             },
         },
     };
