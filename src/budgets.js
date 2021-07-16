@@ -54,7 +54,7 @@ export const useBudgets = function (user) {
                     ],
                     false
                 );
-                await createBudget(`${budget.name} (${budget.description})`, budget.budget);
+                await createBudget(user, `${budget.name} (${budget.description})`, budget.budget);
                 mutate();
             },
         },

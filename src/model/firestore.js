@@ -31,7 +31,22 @@ export const FireStore = function (firebase) {
         updateBudget: function (id, amount, weekly_amount) {
             return db.collection('budgets').doc(id).set({amount: amount, weekly_amount: weekly_amount}, {merge: true});
         },
-        createBudget: async function (name, weekly_budget) {
+        createBudget: async function (user, name, weekly_budget) {
+            db.collection('budgets')
+                .add({
+                    amount: 0,
+                    createdAt: new Date(),
+                    name,
+                    uid: user.uid,
+                    weekly_amount: 0,
+                    weekly_budget,
+                })
+                .then(function (docRef) {
+                    console.log('Document written with ID: ', docRef.id);
+                })
+                .catch(function (error) {
+                    console.error('Error adding document: ', error);
+                });
             return;
         },
     };
