@@ -1,4 +1,4 @@
-import firebase from 'firebase/compat/app';
+import {initializeApp} from 'firebase/app';
 
 const firebaseConfig = {
     apiKey: 'AIzaSyBvHCpKNrfKfc2AZZLP8D0K1AGlUFcX1aE',
@@ -9,18 +9,18 @@ const firebaseConfig = {
     messagingSenderId: '1067130269246',
     appId: '1:1067130269246:web:504d76c1afc05bcbf12b6f',
 };
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 import {Auth} from './auth.js';
 
-const auth = Auth(firebase);
+const auth = Auth(firebaseApp);
 export const signIn = auth.signIn;
 export const signOut = auth.signOut;
 export const onAuthStateChanged = auth.onAuthStateChanged;
 
 import {FireStore} from './firestore.js';
 
-const fs = FireStore(firebase);
+const fs = FireStore(firebaseApp);
 export const getBudgets = fs.getBudgets;
 export const updateBudget = fs.updateBudget;
 export const createBudget = fs.createBudget;

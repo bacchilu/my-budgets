@@ -10,44 +10,33 @@
 //   }
 // }
 
-import 'firebase/compat/firestore';
+import {getFirestore, query, collection, where, orderBy, getDocs, setDoc, doc, addDoc} from 'firebase/firestore';
 
-export const FireStore = function (firebase) {
-    const db = firebase.firestore();
+export const FireStore = function (firebaseApp) {
+    const db = getFirestore(firebaseApp);
 
     return {
-        getBudgets: function (user) {
-            return db
-                .collection('budgets')
-                .where('uid', '==', user.uid)
-                .orderBy('createdAt')
-                .get()
-                .then(function (querySnapshot) {
-                    return querySnapshot.docs.map(function (item) {
-                        return {id: item.id, ...item.data()};
-                    });
-                });
+        getBudgets: async function (user) {
+            const q = query(collection(db, 'budgets'), where('uid', '==', user.uid), orderBy('createdAt'));
+            const querySnapshot = await getDocs(q);
+            return querySnapshot.docs.map(function (item) {
+                return {id: item.id, ...item.data()};
+            });
         },
-        updateBudget: function (id, amount, weekly_amount) {
-            return db.collection('budgets').doc(id).set({amount: amount, weekly_amount: weekly_amount}, {merge: true});
+        updateBudget: async function (id, amount, weekly_amount) {
+            const budgetsRef = collection(db, 'budgets');
+            return await setDoc(doc(budgetsRef, id), {amount: amount, weekly_amount: weekly_amount}, {merge: true});
         },
         createBudget: async function (user, name, weekly_budget) {
-            db.collection('budgets')
-                .add({
-                    amount: 0,
-                    createdAt: new Date(),
-                    name,
-                    uid: user.uid,
-                    weekly_amount: 0,
-                    weekly_budget,
-                })
-                .then(function (docRef) {
-                    console.log('Document written with ID: ', docRef.id);
-                })
-                .catch(function (error) {
-                    console.error('Error adding document: ', error);
-                });
-            return;
+            const docRef = await addDoc(collection(db, 'budgets'), {
+                amount: 0,
+                createdAt: new Date(),
+                name,
+                uid: user.uid,
+                weekly_amount: 0,
+                weekly_budget,
+            });
+            console.log('Document written with ID: ', docRef.id);
         },
     };
 };
