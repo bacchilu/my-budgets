@@ -10,7 +10,7 @@
 //   }
 // }
 
-import 'firebase/firestore';
+import 'firebase/compat/firestore';
 
 export const FireStore = function (firebase) {
     const db = firebase.firestore();

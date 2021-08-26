@@ -1,4 +1,4 @@
-import 'firebase/auth';
+import 'firebase/compat/auth';
 
 export const Auth = function (firebase) {
     return {
