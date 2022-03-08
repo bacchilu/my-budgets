@@ -12,6 +12,7 @@ const AuthPanel = function (props) {
                 <div style={{marginTop: '10px'}} className="alert alert-danger" role="alert">
                     <p>Please authenticate!</p>
                 </div>
+                <p>You need to authenticate with a Google Account in order to use this app.</p>
             </div>
         </React.Fragment>
     );
