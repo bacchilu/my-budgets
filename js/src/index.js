@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
 
 import {useUser, Spinner, EmptyNavbar, Login} from './utils.js';
 import {MainPage} from './main';
@@ -37,4 +37,4 @@ const App = function (props) {
     return <MainPage user={user} />;
 };
 
-ReactDOM.render(<App />, document.getElementById('app'));
+createRoot(document.getElementById('app')).render(<App />);
