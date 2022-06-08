@@ -18,12 +18,10 @@ export const BudgetCard = function ({budget, spend}) {
             </Modal>
             <div className="card border-secondary" style={{margin: '10px'}}>
                 <div className="card-header">
-                    {budget['name']} <sub>{toCurrency(budget['weekly_budget'])}</sub>
+                    {budget['name']}
                     <span className="float-end">
                         <form className="row row-cols-auto align-items-center">
-                            <strong>
-                                <em>{toCurrency(budget['amount'])}</em>
-                            </strong>
+                            <small>{toCurrency(budget['weekly_budget'])}</small>
                             <div className="dropdown">
                                 <button
                                     className="btn btn-sm btn-outline-secondary dropdown-toggle"
@@ -31,7 +29,7 @@ export const BudgetCard = function ({budget, spend}) {
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    ⚙
+                                    <i className="bi bi-gear"></i>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-end">
                                     <button
@@ -40,7 +38,7 @@ export const BudgetCard = function ({budget, spend}) {
                                             e.preventDefault();
                                         }}
                                     >
-                                        TODO
+                                        Details
                                     </button>
                                     <button
                                         className="dropdown-item"
@@ -48,7 +46,7 @@ export const BudgetCard = function ({budget, spend}) {
                                             e.preventDefault();
                                         }}
                                     >
-                                        TODO
+                                        Move
                                     </button>
                                 </div>
                             </div>
@@ -56,10 +54,15 @@ export const BudgetCard = function ({budget, spend}) {
                     </span>
                 </div>
                 <div className="card-body">
-                    <p style={{marginTop: '4px'}}>
+                    <p style={{marginBottom: '0rem'}}>
                         <span className="card-subtitle mb-2 text-muted">{toCurrency(budget['weekly_amount'])}</span>
+                    </p>
+                    <p>
+                        <strong>
+                            <em>{toCurrency(budget['amount'])}</em>
+                        </strong>
                         <button className="btn btn-outline-primary float-end" onClick={onClick}>
-                            Add cost
+                            <i className="bi bi-currency-euro"></i> Add Cost
                         </button>
                     </p>
                 </div>
