@@ -1,13 +1,13 @@
 {
     "name": "my-budgets",
-    "version": "2.1.0",
+    "version": "3.0.0",
     "description": "My Budgets",
     "private": true,
     "source": "src/index.html",
     "browserslist": "defaults",
     "scripts": {
         "update": "ncu -u",
-        "serve": "parcel -p 8000 --lazy",
+        "serve": "parcel -p 8000",
         "watch": "parcel watch",
         "build": "rm -rf dist && rm -rf docs && parcel build --no-source-maps --dist-dir docs --public-url=/my-budgets"
     },
@@ -33,14 +33,14 @@
         "vueIndentScriptAndStyle": false
     },
     "devDependencies": {
-        "@parcel/packager-raw-url": "^2.5.0",
-        "@parcel/transformer-webmanifest": "^2.5.0",
-        "npm-check-updates": "^12.5.10",
-        "parcel": "^2.5.0",
+        "@parcel/packager-raw-url": "^2.6.0",
+        "@parcel/transformer-webmanifest": "^2.6.0",
+        "npm-check-updates": "^13.1.2",
+        "parcel": "^2.6.0",
         "process": "^0.11.10"
     },
     "dependencies": {
-        "firebase": "^9.7.0",
+        "firebase": "^9.8.2",
         "firebaseui": "^6.0.1",
         "react": "^18.1.0",
         "react-dom": "^18.1.0",
