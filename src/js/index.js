@@ -1,7 +1,7 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 
-import {useUser, Spinner, EmptyNavbar, Login} from './utils.js';
+import {useUser, Spinner, EmptyNavbar} from './utils.js';
 import {MainPage} from './main';
 
 const AuthPanel = function () {

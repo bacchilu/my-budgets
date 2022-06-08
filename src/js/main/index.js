@@ -3,7 +3,7 @@ import React from 'react';
 import {Spinner, EmptyNavbar} from '../utils.js';
 import {useBudgets} from '../budgets.js';
 import {BudgetCard} from '../budget_card';
-import {Bar} from '../progress.js';
+// import {Bar} from '../progress.js';
 import {GlobalSpinner} from '../global_spinner.js';
 import {NavBar} from './navbar.js';
 
@@ -30,12 +30,12 @@ export const MainPage = function ({user}) {
     if (error !== undefined) return <ErrorPage user={user} error={error} />;
     if (data === undefined) return <Spinner />;
 
-    const total = data.reduce(function (acc, item) {
-        return acc + item['amount'];
-    }, 0);
-    const totalWeeklyAmount = data.reduce(function (acc, item) {
-        return acc + item['weekly_amount'];
-    }, 0);
+    // const total = data.reduce(function (acc, item) {
+    //     return acc + item['amount'];
+    // }, 0);
+    // const totalWeeklyAmount = data.reduce(function (acc, item) {
+    //     return acc + item['weekly_amount'];
+    // }, 0);
 
     const items = data.map(function (budget) {
         const spend = function (value) {
@@ -49,9 +49,9 @@ export const MainPage = function ({user}) {
         <React.Fragment>
             <NavBar user={user} budgets={data} Methods={Methods} />
             <div className="container" style={{paddingTop: '1em'}}>
-                <div style={{marginTop: '4px'}}>
+                {/* <div style={{marginTop: '4px'}}>
                     <Bar amount={total} weekly_amount={totalWeeklyAmount} />
-                </div>
+                </div> */}
                 <div className="row">{items}</div>
             </div>
             <GlobalSpinner user={user} />
