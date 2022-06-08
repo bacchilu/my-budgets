@@ -11,17 +11,25 @@ export const BudgetCard = function ({budget, spend}) {
         setModalOpened(true);
     };
 
+    const onDetails = function (e) {
+        e.preventDefault();
+    };
+
+    const onMove = function (e) {
+        e.preventDefault();
+    };
+
     return (
-        <div key={budget['id']} className="col-sm-6">
+        <div key={budget.id} className="col-sm-6">
             <Modal opened={modalOpened} setOpened={setModalOpened}>
                 <BudgetModal setOpened={setModalOpened} budget={budget} action={spend} />
             </Modal>
             <div className="card border-secondary" style={{margin: '10px'}}>
                 <div className="card-header">
-                    {budget['name']}
+                    <span>{budget.name}</span>
                     <span className="float-end">
                         <form className="row row-cols-auto align-items-center">
-                            <small>{toCurrency(budget['weekly_budget'])}</small>
+                            <small>{toCurrency(budget.weekly_budget)}</small>
                             <div className="dropdown">
                                 <button
                                     className="btn btn-sm btn-outline-secondary dropdown-toggle"
@@ -32,20 +40,10 @@ export const BudgetCard = function ({budget, spend}) {
                                     <i className="bi bi-gear"></i>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-end">
-                                    <button
-                                        className="dropdown-item"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                        }}
-                                    >
+                                    <button className="dropdown-item" onClick={onDetails}>
                                         Details
                                     </button>
-                                    <button
-                                        className="dropdown-item"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                        }}
-                                    >
+                                    <button className="dropdown-item" onClick={onMove}>
                                         Move
                                     </button>
                                 </div>
@@ -55,11 +53,11 @@ export const BudgetCard = function ({budget, spend}) {
                 </div>
                 <div className="card-body">
                     <p style={{marginBottom: '0rem'}}>
-                        <span className="card-subtitle mb-2 text-muted">{toCurrency(budget['weekly_amount'])}</span>
+                        <span className="card-subtitle mb-2 text-muted">{toCurrency(budget.weekly_amount)}</span>
                     </p>
                     <p>
-                        <strong>
-                            <em>{toCurrency(budget['amount'])}</em>
+                        <strong className="fs-5">
+                            <em>{toCurrency(budget.amount)}</em>
                         </strong>
                         <button className="btn btn-outline-primary float-end" onClick={onClick}>
                             <i className="bi bi-currency-euro"></i> Add Cost
