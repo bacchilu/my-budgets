@@ -24,7 +24,7 @@ export const BudgetCard = function ({budget, spend}) {
             <Modal opened={modalOpened} setOpened={setModalOpened}>
                 <BudgetModal setOpened={setModalOpened} budget={budget} action={spend} />
             </Modal>
-            <div className="card border-secondary" style={{margin: '10px'}}>
+            <div className="card border-secondary m-2">
                 <div className="card-header">
                     <span>{budget.name}</span>
                     <span className="float-end">
@@ -52,7 +52,7 @@ export const BudgetCard = function ({budget, spend}) {
                     </span>
                 </div>
                 <div className="card-body">
-                    <p style={{marginBottom: '0rem'}}>
+                    <p className="mb-0">
                         <span className="card-subtitle mb-2 text-muted">{toCurrency(budget.weekly_amount)}</span>
                     </p>
                     <p>
