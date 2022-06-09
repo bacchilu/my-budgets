@@ -14,6 +14,7 @@ export const useUser = function () {
     React.useEffect(function () {
         return onAuthStateChanged(setUser);
     }, []);
+
     return user;
 };
 
@@ -40,7 +41,7 @@ export const Login = function ({user}) {
 
 export const Spinner = function (props) {
     return (
-        <div style={{marginTop: '50px'}} className="d-flex justify-content-center">
+        <div className="mt-5 d-flex justify-content-center">
             <div style={{width: '3rem', height: '3rem'}} className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </div>
