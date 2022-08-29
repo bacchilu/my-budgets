@@ -1,9 +1,34 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 
-import {useUser, Spinner, EmptyNavbar} from './utils.js';
 import {MainPage} from './main';
 import {signIn} from './model/index.js';
+import {EmptyNavbar, Spinner, useUser} from './utils.js';
+
+const Quotations = function () {
+    const data = [
+        {message: 'Forget about goals, focus on systems instead.', author: 'James Clear', source: 'Atomic Habits'},
+        {
+            message: 'Stand up straight with your shoulders back.',
+            author: 'Jordan Peterson',
+            source: '12 Rules for Life',
+        },
+    ];
+    const c = data[Math.floor(Math.random() * data.length)];
+
+    return (
+        <div className="mt-5 d-flex justify-content-center lead">
+            <figure>
+                <blockquote className="blockquote">
+                    <p>{c.message}</p>
+                </blockquote>
+                <figcaption className="blockquote-footer">
+                    {c.author} in <cite title="Source Title">{c.source}</cite>
+                </figcaption>
+            </figure>
+        </div>
+    );
+};
 
 const AuthPanel = function () {
     const onClick = function (e) {
@@ -37,7 +62,7 @@ const App = function () {
         return (
             <>
                 <Spinner />
-                <p className="mt-5 d-flex justify-content-center lead">Alla gente non piace essere criticata</p>
+                <Quotations />
             </>
         );
     if (user === null) return <AuthPanel />;
