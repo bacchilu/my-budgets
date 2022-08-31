@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Spinner, EmptyNavbar} from '../utils';
 import {useBudgets} from '../budgets';
 import {BudgetCard} from '../budget_card';
+import {EmptyNavbar, Spinner} from '../utils';
 // import {Bar} from '../progress';
 import {GlobalSpinner} from '../global_spinner';
 import {NavBar} from './navbar';

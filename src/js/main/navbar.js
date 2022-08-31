@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {toCurrency, Login} from '../utils';
-import {RechargeAllModal, NewBudgetModal} from './modals';
+import {Login, toCurrency} from '../utils';
+import {NewBudgetModal, RechargeAllModal} from './modals';
 
 export const NavBar = function ({user, budgets, Methods}) {
     const [rechargeAllModalOpened, setRechargeAllModalOpened] = React.useState(false);
@@ -28,7 +28,10 @@ export const NavBar = function ({user, budgets, Methods}) {
     };
 
     const totalWeeklyBudget = budgets.reduce(function (acc, item) {
-        return acc + item['weekly_budget'];
+        return acc + item.weekly_budget;
+    }, 0);
+    const total = budgets.reduce(function (acc, item) {
+        return acc + item.amount;
     }, 0);
 
     return (
@@ -67,6 +70,7 @@ export const NavBar = function ({user, budgets, Methods}) {
                             </a>
                         </li>
                     </ul>
+                    <span className="navbar-brand fst-italic">{toCurrency(total)}</span>
                     <form className="d-flex">
                         <Login user={user} />
                     </form>
