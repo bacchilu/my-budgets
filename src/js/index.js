@@ -5,7 +5,7 @@ import {MainPage} from './main';
 import {signIn} from './model/index.js';
 import {EmptyNavbar, Spinner, useUser} from './utils.js';
 
-const Quotations = function () {
+const getRandomQuote = function () {
     const data = [
         {message: 'Forget about goals, focus on systems instead.', author: 'James Clear', source: 'Atomic Habits'},
         {
@@ -13,8 +13,15 @@ const Quotations = function () {
             author: 'Jordan Peterson',
             source: '12 Rules for Life',
         },
+        {message: 'A year from now you will wish you had started today.', author: 'Unknown', source: 'Unknown'},
+        {message: 'If you don’t risk anything, you risk even more.', author: 'Erica Jong', source: 'Unknown'},
     ];
-    const c = data[Math.floor(Math.random() * data.length)];
+
+    return data[Math.floor(Math.random() * data.length)];
+};
+
+const Quotations = function () {
+    const c = getRandomQuote();
 
     return (
         <div className="mt-5 d-flex justify-content-center lead">
