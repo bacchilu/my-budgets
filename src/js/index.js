@@ -77,4 +77,9 @@ const App = function () {
     return <MainPage user={user} />;
 };
 
-createRoot(document.getElementById('app')).render(<App />);
+createRoot(document.getElementById('app')).render(
+    <>
+        <App />
+        <div style={{position: 'fixed', bottom: '0em', left: '0em'}}>4.1.0</div>
+    </>
+);
