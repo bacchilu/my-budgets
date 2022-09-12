@@ -1,6 +1,6 @@
 {
     "name": "my-budgets",
-    "version": "4.0.0",
+    "version": "4.1.0",
     "description": "My Budgets",
     "private": true,
     "source": "src/index.html",
@@ -35,12 +35,12 @@
     "devDependencies": {
         "@parcel/packager-raw-url": "^2.7.0",
         "@parcel/transformer-webmanifest": "^2.7.0",
-        "npm-check-updates": "^16.0.6",
+        "npm-check-updates": "^16.1.2",
         "parcel": "^2.7.0",
         "process": "^0.11.10"
     },
     "dependencies": {
-        "firebase": "^9.9.3",
+        "firebase": "^9.9.4",
         "firebaseui": "^6.0.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
