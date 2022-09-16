@@ -77,9 +77,17 @@ const App = function () {
     return <MainPage user={user} />;
 };
 
+const Version = function ({value}) {
+    return (
+        <div style={{position: 'fixed', bottom: '0.1rem', left: '0.1rem'}} className="font-monospace">
+            {value}
+        </div>
+    );
+};
+
 createRoot(document.getElementById('app')).render(
     <>
         <App />
-        <div style={{position: 'fixed', bottom: '0em', left: '0em'}}>4.2.0</div>
+        <Version value={'4.2.0'} />
     </>
 );
