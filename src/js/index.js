@@ -1,6 +1,7 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 
+import {version} from '../../package.json';
 import {MainPage} from './main';
 import {signIn} from './model/index.js';
 import {EmptyNavbar, Spinner, useUser} from './utils.js';
@@ -77,10 +78,10 @@ const App = function () {
     return <MainPage user={user} />;
 };
 
-const Version = function ({value}) {
+const Version = function () {
     return (
         <div style={{position: 'fixed', bottom: '0.1rem', left: '0.1rem'}} className="font-monospace">
-            {value}
+            {version}
         </div>
     );
 };
@@ -88,6 +89,6 @@ const Version = function ({value}) {
 createRoot(document.getElementById('app')).render(
     <>
         <App />
-        <Version value={'4.2.0'} />
+        <Version />
     </>
 );
