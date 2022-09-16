@@ -80,6 +80,6 @@ const App = function () {
 createRoot(document.getElementById('app')).render(
     <>
         <App />
-        <div style={{position: 'fixed', bottom: '0em', left: '0em'}}>4.1.0</div>
+        <div style={{position: 'fixed', bottom: '0em', left: '0em'}}>4.2.0</div>
     </>
 );
