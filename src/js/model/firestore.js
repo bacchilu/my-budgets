@@ -10,7 +10,7 @@
 //   }
 // }
 
-import {getFirestore, query, collection, where, orderBy, getDocs, setDoc, doc, addDoc} from 'firebase/firestore';
+import {addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where} from 'firebase/firestore';
 
 export const FireStore = function (firebaseApp) {
     const db = getFirestore(firebaseApp);

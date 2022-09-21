@@ -11,14 +11,14 @@ const firebaseConfig = {
 };
 const firebaseApp = initializeApp(firebaseConfig);
 
-import {Auth} from './auth.js';
+import {Auth} from './auth';
 
 const auth = Auth(firebaseApp);
 export const signIn = auth.signIn;
 export const signOut = auth.signOut;
 export const onAuthStateChanged = auth.onAuthStateChanged;
 
-import {FireStore} from './firestore.js';
+import {FireStore} from './firestore';
 
 const fs = FireStore(firebaseApp);
 export const getBudgets = fs.getBudgets;

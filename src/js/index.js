@@ -3,8 +3,8 @@ import {createRoot} from 'react-dom/client';
 
 import {version} from '../../package.json';
 import {MainPage} from './main';
-import {signIn} from './model/index.js';
-import {EmptyNavbar, Spinner, useUser} from './utils.js';
+import {signIn} from './model';
+import {EmptyNavbar, Spinner, useUser} from './utils';
 
 const getRandomQuote = function () {
     const data = [

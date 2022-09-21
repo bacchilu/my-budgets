@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 
-import {getBudgets, updateBudget, createBudget} from './model';
+import {createBudget, getBudgets, updateBudget} from './model';
 
 export const useBudgets = function (user) {
     const {data, error, isValidating, mutate} = useSWR(['budgets', user.uid], function (key, uid) {
