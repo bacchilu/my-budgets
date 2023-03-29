@@ -3,15 +3,15 @@ import useSWR from 'swr';
 import {createBudget, getBudgets, updateBudget} from './model';
 
 export const useBudgets = function (user) {
-    const {data, error, isValidating, mutate} = useSWR(['budgets', user.uid], function ([key, uid]) {
+    const res = useSWR(['budgets', user.uid], function ([key, uid]) {
         console.assert(key === 'budgets');
         return getBudgets({uid});
     });
 
+    const {data, mutate} = res;
+
     return {
-        data,
-        error,
-        isValidating,
+        ...res,
         Methods: {
             spend: async function (budget, value) {
                 mutate(
