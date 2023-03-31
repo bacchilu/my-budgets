@@ -1,6 +1,6 @@
 {
     "name": "my-budgets",
-    "version": "5.0.0",
+    "version": "5.1.0",
     "description": "My Budgets",
     "private": true,
     "source": "src/index.html",
@@ -33,11 +33,11 @@
         "vueIndentScriptAndStyle": false
     },
     "devDependencies": {
-        "npm-check-updates": "^16.8.2",
+        "npm-check-updates": "^16.9.0",
         "parcel": "^2.8.3"
     },
     "dependencies": {
-        "firebase": "^9.18.0",
+        "firebase": "^9.19.0",
         "firebaseui": "^6.0.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
