@@ -33,6 +33,8 @@
         "vueIndentScriptAndStyle": false
     },
     "devDependencies": {
+        "@types/react": "^18.0.31",
+        "@types/react-dom": "^18.0.11",
         "npm-check-updates": "^16.9.0",
         "parcel": "^2.8.3"
     },
