@@ -1,14 +1,5 @@
 import {FirebaseApp} from 'firebase/app';
-import {
-    getAuth,
-    getRedirectResult,
-    GoogleAuthProvider,
-    NextOrObserver,
-    onAuthStateChanged,
-    signInWithRedirect,
-    signOut,
-    User,
-} from 'firebase/auth';
+import {getAuth, getRedirectResult, GoogleAuthProvider, NextOrObserver, signInWithRedirect, User} from 'firebase/auth';
 
 export const Auth = function (firebaseApp: FirebaseApp) {
     const auth = getAuth(firebaseApp);
@@ -22,7 +13,7 @@ export const Auth = function (firebaseApp: FirebaseApp) {
                 const result = await getRedirectResult(auth);
                 if (result !== null) {
                     const user = result.user;
-                    console.log(user['displayName'], user['email'], user['photoURL']);
+                    console.log(user.displayName, user.email, user.photoURL);
                 }
             } catch (error) {
                 const errorCode = error.code;
@@ -31,10 +22,10 @@ export const Auth = function (firebaseApp: FirebaseApp) {
             }
         },
         signOut: function () {
-            signOut(auth);
+            auth.signOut();
         },
-        onAuthStateChanged: function (cb: NextOrObserver<User>) {
-            return onAuthStateChanged(auth, cb);
+        onAuthStateChanged: function (cb: NextOrObserver<User | null>) {
+            return auth.onAuthStateChanged(cb);
         },
     };
 };

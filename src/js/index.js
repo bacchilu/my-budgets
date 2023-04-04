@@ -1,10 +1,10 @@
 import React from 'react';
 import {createRoot} from 'react-dom/client';
 
-import {version} from '../../package.json';
 import {MainPage} from './main';
 import {signIn} from './model';
 import {EmptyNavbar, Spinner, useUser} from './utils';
+import {Version} from './version';
 
 const getRandomQuote = function () {
     const data = [
@@ -78,17 +78,11 @@ const App = function () {
     return <MainPage user={user} />;
 };
 
-const Version = function () {
-    return (
-        <div style={{position: 'fixed', bottom: '0.1rem', left: '0.1rem'}} className="font-monospace">
-            {version}
-        </div>
-    );
-};
-
 createRoot(document.getElementById('app')).render(
     <>
         <App />
-        <Version />
+        <div style={{position: 'fixed', bottom: '0.1rem', left: '0.1rem'}} className="font-monospace">
+            <Version />
+        </div>
     </>
 );
