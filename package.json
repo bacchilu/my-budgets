@@ -1,6 +1,6 @@
 {
     "name": "my-budgets",
-    "version": "5.2.0",
+    "version": "5.2.1",
     "description": "My Budgets",
     "private": true,
     "source": "src/index.html",
@@ -35,7 +35,7 @@
     "devDependencies": {
         "@types/react": "^18.0.33",
         "@types/react-dom": "^18.0.11",
-        "npm-check-updates": "^16.10.1",
+        "npm-check-updates": "^16.10.7",
         "parcel": "^2.8.3"
     },
     "dependencies": {
