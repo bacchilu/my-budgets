@@ -1,31 +1,36 @@
 import {FirebaseApp} from 'firebase/app';
-import {getAuth, getRedirectResult, GoogleAuthProvider, NextOrObserver, signInWithRedirect, User} from 'firebase/auth';
+import {getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, User} from 'firebase/auth';
+
+interface SignInResult {
+    displayName: string;
+    email: string;
+    photoURL: string;
+}
 
 export const Auth = function (firebaseApp: FirebaseApp) {
     const auth = getAuth(firebaseApp);
 
-    return {
-        signIn: async function () {
-            const provider = new GoogleAuthProvider();
-            provider.setCustomParameters({prompt: 'select_account'});
-            try {
-                await signInWithRedirect(auth, provider);
-                const result = await getRedirectResult(auth);
-                if (result !== null) {
-                    const user = result.user;
-                    console.log(user.displayName, user.email, user.photoURL);
-                }
-            } catch (error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
+    const signIn = async () => {
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({prompt: 'select_account'});
+        try {
+            await signInWithRedirect(auth, provider);
+            const result = await getRedirectResult(auth);
+            if (result !== null) {
+                const {displayName, email, photoURL} = result.user;
+                return {displayName, email, photoURL} as SignInResult;
             }
-        },
-        signOut: function () {
-            auth.signOut();
-        },
-        onAuthStateChanged: function (cb: NextOrObserver<User | null>) {
-            return auth.onAuthStateChanged(cb);
-        },
+        } catch (error) {
+            const {code, message} = error;
+            console.log(code, message);
+            return null;
+        }
+        return null;
     };
+
+    const signOut = () => auth.signOut();
+
+    const onAuthStateChanged = (cb: (user: User | null | undefined) => {}) => auth.onAuthStateChanged(cb) as () => {};
+
+    return {signIn, signOut, onAuthStateChanged};
 };

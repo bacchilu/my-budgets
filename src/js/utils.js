@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {signIn, signOut, onAuthStateChanged} from './model';
+import {onAuthStateChanged, signIn, signOut} from './model';
 
 export const toCurrency = function (value) {
     return new Intl.NumberFormat('it-IT', {
@@ -17,6 +17,23 @@ export const useUser = function () {
 
     return user;
 };
+// TYPESCRIPT
+// import {User} from 'firebase/auth';
+// import React from 'react';
+// const useUser = function () {
+//     const [user, setUser] = React.useState<User | null | undefined>(undefined) as [
+//         User | null | undefined,
+//         (user: User | null | undefined) => {}
+//     ];
+//     React.useEffect(
+//         function () {
+//             return onAuthStateChanged(setUser);
+//         } as React.EffectCallback,
+//         []
+//     );
+
+//     return user;
+// };
 
 export const Login = function ({user}) {
     const login = function (e) {
