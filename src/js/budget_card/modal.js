@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {toCurrency} from '../utils.js';
+import {toCurrency} from '../utils';
 
 export const BudgetModal = function ({setOpened, budget, action}) {
     const inputEl = React.useRef(null);

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {toCurrency} from '../utils.js';
 import {Modal} from '../libs/modal.js';
+import {toCurrency} from '../utils';
 import {BudgetModal} from './modal.js';
 
 export const BudgetCard = function ({budget, spend}) {

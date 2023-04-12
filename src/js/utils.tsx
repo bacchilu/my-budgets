@@ -1,8 +1,9 @@
+import {User} from 'firebase/auth';
 import React from 'react';
 
 import {onAuthStateChanged, signIn, signOut} from './model';
 
-export const toCurrency = function (value) {
+export const toCurrency = function (value: number) {
     return new Intl.NumberFormat('it-IT', {
         style: 'currency',
         currency: 'EUR',
@@ -10,37 +11,30 @@ export const toCurrency = function (value) {
 };
 
 export const useUser = function () {
-    const [user, setUser] = React.useState(undefined);
-    React.useEffect(function () {
-        return onAuthStateChanged(setUser);
-    }, []);
+    const [user, setUser] = React.useState<User | null | undefined>(undefined) as [
+        User | null | undefined,
+        (user: User | null | undefined) => {}
+    ];
+    React.useEffect(
+        function () {
+            return onAuthStateChanged(setUser);
+        } as React.EffectCallback,
+        []
+    );
 
     return user;
 };
-// TYPESCRIPT
-// import {User} from 'firebase/auth';
-// import React from 'react';
-// const useUser = function () {
-//     const [user, setUser] = React.useState<User | null | undefined>(undefined) as [
-//         User | null | undefined,
-//         (user: User | null | undefined) => {}
-//     ];
-//     React.useEffect(
-//         function () {
-//             return onAuthStateChanged(setUser);
-//         } as React.EffectCallback,
-//         []
-//     );
 
-//     return user;
-// };
+type LoginProps = {
+    user: User | null;
+};
 
-export const Login = function ({user}) {
-    const login = function (e) {
+export const Login = function ({user}: LoginProps) {
+    const login = function (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
         signIn();
     };
-    const logout = function (e) {
+    const logout = function (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         e.preventDefault();
         signOut();
     };
@@ -56,7 +50,7 @@ export const Login = function ({user}) {
     );
 };
 
-export const Spinner = function (props) {
+export const Spinner = function () {
     return (
         <div className="mt-5 d-flex justify-content-center">
             <div style={{width: '3rem', height: '3rem'}} className="spinner-border" role="status">
@@ -66,7 +60,7 @@ export const Spinner = function (props) {
     );
 };
 
-export const EmptyNavbar = function (props) {
+export const EmptyNavbar = function () {
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container-fluid">
