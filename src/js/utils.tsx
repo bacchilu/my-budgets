@@ -11,16 +11,8 @@ export const toCurrency = function (value: number) {
 };
 
 export const useUser = function () {
-    const [user, setUser] = React.useState<User | null | undefined>(undefined) as [
-        User | null | undefined,
-        (user: User | null | undefined) => {}
-    ];
-    React.useEffect(
-        function () {
-            return onAuthStateChanged(setUser);
-        } as React.EffectCallback,
-        []
-    );
+    const [user, setUser] = React.useState<User | null | undefined>(undefined);
+    React.useEffect(() => onAuthStateChanged(setUser), []);
 
     return user;
 };
