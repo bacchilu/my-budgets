@@ -30,8 +30,10 @@ export const Auth = function (firebaseApp: FirebaseApp) {
 
     const signOut = () => auth.signOut();
 
-    const onAuthStateChanged = (cb: (user: User | null | undefined) => void) => {
-        auth.onAuthStateChanged(cb);
+    const onAuthStateChanged = (cb: (user: User | null) => void) => {
+        auth.onAuthStateChanged((user) => {
+            cb(user);
+        });
     };
 
     return {signIn, signOut, onAuthStateChanged};
