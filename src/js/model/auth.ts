@@ -1,10 +1,15 @@
 import {FirebaseApp} from 'firebase/app';
-import {getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, User} from 'firebase/auth';
+import {getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect} from 'firebase/auth';
 
 interface SignInResult {
     displayName: string;
     email: string;
     photoURL: string;
+}
+
+export interface AppUser {
+    uid: string;
+    displayName: string;
 }
 
 export const Auth = function (firebaseApp: FirebaseApp) {
@@ -30,9 +35,9 @@ export const Auth = function (firebaseApp: FirebaseApp) {
 
     const signOut = () => auth.signOut();
 
-    const onAuthStateChanged = (cb: (user: User | null) => void) => {
+    const onAuthStateChanged = (cb: (user: AppUser | null) => void) => {
         auth.onAuthStateChanged((user) => {
-            cb(user);
+            cb(user as AppUser);
         });
     };
 

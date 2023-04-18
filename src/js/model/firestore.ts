@@ -11,8 +11,8 @@
 // }
 
 import firebase from 'firebase/app';
-import {User as FirebaseUser} from 'firebase/auth';
 import {addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where} from 'firebase/firestore';
+import {AppUser} from './auth';
 
 interface Budget {
     id: string;
@@ -27,7 +27,7 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
     const db = getFirestore(firebaseApp);
 
     return {
-        getBudgets: async function (user: FirebaseUser) {
+        getBudgets: async function (user: AppUser) {
             const q = query(collection(db, 'budgets'), where('uid', '==', user.uid), orderBy('createdAt'));
             const querySnapshot = await getDocs(q);
             return querySnapshot.docs.map(function (item) {
@@ -38,7 +38,7 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
             const budgetsRef = collection(db, 'budgets');
             await setDoc(doc(budgetsRef, id), {amount: amount, weekly_amount: weekly_amount}, {merge: true});
         },
-        createBudget: async function (user: FirebaseUser, name: string, weekly_budget: number) {
+        createBudget: async function (user: AppUser, name: string, weekly_budget: number) {
             const docRef = await addDoc(collection(db, 'budgets'), {
                 amount: 0,
                 createdAt: new Date(),

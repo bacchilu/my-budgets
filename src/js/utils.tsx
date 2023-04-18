@@ -1,7 +1,7 @@
-import {User} from 'firebase/auth';
 import React from 'react';
 
 import {onAuthStateChanged, signIn, signOut} from './model';
+import {AppUser} from './model/auth';
 
 export const toCurrency = function (value: number) {
     return new Intl.NumberFormat('it-IT', {
@@ -11,14 +11,14 @@ export const toCurrency = function (value: number) {
 };
 
 export const useUser = function () {
-    const [user, setUser] = React.useState<User | null | undefined>(undefined);
+    const [user, setUser] = React.useState<AppUser | null | undefined>(undefined);
     React.useEffect(() => onAuthStateChanged(setUser), []);
 
     return user;
 };
 
 type LoginProps = {
-    user: User | null;
+    user: AppUser | null;
 };
 
 export const Login = function ({user}: LoginProps) {
