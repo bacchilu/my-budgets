@@ -14,13 +14,14 @@ import firebase from 'firebase/app';
 import {addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where} from 'firebase/firestore';
 import {AppUser} from './auth';
 
-interface Budget {
+export interface Budget {
     id: string;
     amount: number;
     createdAt: Date;
     name: string;
     uid: string;
     weekly_amount: number;
+    weekly_budget: number;
 }
 
 export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
@@ -31,6 +32,7 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
             const q = query(collection(db, 'budgets'), where('uid', '==', user.uid), orderBy('createdAt'));
             const querySnapshot = await getDocs(q);
             return querySnapshot.docs.map(function (item) {
+                console.log({id: item.id, ...item.data()});
                 return {id: item.id, ...item.data()};
             }) as Budget[];
         },

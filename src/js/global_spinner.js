@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useBudgets} from './budgets.js';
+import {useBudgets} from './budgets';
 
 export const GlobalSpinner = function ({user}) {
     const {isValidating} = useBudgets(user);
