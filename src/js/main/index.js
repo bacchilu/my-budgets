@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {useBudgets} from '../budgets';
 import {BudgetCard} from '../budget_card';
+import {useBudgets} from '../budgets';
 import {EmptyNavbar, Spinner} from '../utils';
 // import {Bar} from '../progress';
 import {GlobalSpinner} from '../global_spinner';
@@ -37,8 +37,8 @@ export const MainPage = function ({user}) {
     //     return acc + item['weekly_amount'];
     // }, 0);
 
-    const items = budgets.map(function (budget) {
-        const spend = function (value) {
+    const items = budgets.map((budget) => {
+        const spend = (value) => {
             Methods.spend(budget, value);
         };
 

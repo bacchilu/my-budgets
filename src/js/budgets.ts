@@ -11,7 +11,7 @@ export const useBudgets = (user: AppUser) => {
     return {
         ...res,
         Methods: {
-            spend: async function (budget: Budget, value: number) {
+            spend: async (budget: Budget, value: number) => {
                 mutate(
                     data!.map((b) =>
                         budget.id === b.id

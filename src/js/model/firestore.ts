@@ -31,9 +31,9 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
         getBudgets: async function (user: AppUser) {
             const q = query(collection(db, 'budgets'), where('uid', '==', user.uid), orderBy('createdAt'));
             const querySnapshot = await getDocs(q);
-            return querySnapshot.docs.map(function (item) {
-                console.log({id: item.id, ...item.data()});
-                return {id: item.id, ...item.data()};
+            return querySnapshot.docs.map((item) => {
+                const rawData = item.data();
+                return {id: item.id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)};
             }) as Budget[];
         },
         updateBudget: async function (id: string, amount: number, weekly_amount: number) {
