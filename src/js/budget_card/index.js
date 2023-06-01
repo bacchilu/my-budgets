@@ -4,7 +4,7 @@ import {Modal} from '../libs/modal.js';
 import {toCurrency} from '../utils';
 import {BudgetModal} from './modal.js';
 
-export const BudgetCard = function ({budget, spend}) {
+export const BudgetCard = function ({budget, Methods}) {
     const [modalOpened, setModalOpened] = React.useState(false);
 
     const onClick = function () {
@@ -22,7 +22,7 @@ export const BudgetCard = function ({budget, spend}) {
     return (
         <div key={budget.id} className="col-sm-6">
             <Modal opened={modalOpened} setOpened={setModalOpened}>
-                <BudgetModal setOpened={setModalOpened} budget={budget} action={spend} />
+                <BudgetModal setOpened={setModalOpened} budget={budget} spend={Methods.spend} />
             </Modal>
             <div className="card border-secondary m-2">
                 <div className="card-header">

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {toCurrency} from '../utils';
 
-export const BudgetModal = function ({setOpened, budget, action}) {
+export const BudgetModal = function ({setOpened, budget, spend}) {
     const inputEl = React.useRef(null);
     React.useEffect(function () {
         inputEl.current.focus();
@@ -11,7 +11,7 @@ export const BudgetModal = function ({setOpened, budget, action}) {
 
     const onSubmit = function (e) {
         e.preventDefault();
-        action(parseFloat(value));
+        spend(budget, parseFloat(value));
         setOpened(false);
     };
     const onChange = function (e) {

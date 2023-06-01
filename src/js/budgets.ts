@@ -15,7 +15,7 @@ export const useBudgets = (user: AppUser) => {
                 mutate(
                     data!.map((b) =>
                         budget.id === b.id
-                            ? {...budget, amount: budget.amount - value, weekly_amount: budget.weekly_amount + value}
+                            ? {...b, amount: b.amount - value, weekly_amount: b.weekly_amount + value}
                             : b
                     ),
                     false

@@ -37,13 +37,7 @@ export const MainPage = function ({user}) {
     //     return acc + item['weekly_amount'];
     // }, 0);
 
-    const items = budgets.map((budget) => {
-        const spend = (value) => {
-            Methods.spend(budget, value);
-        };
-
-        return <BudgetCard key={budget.id} budget={budget} spend={spend} />;
-    });
+    const items = budgets.map((budget) => <BudgetCard key={budget.id} budget={budget} Methods={Methods} />);
 
     return (
         <React.Fragment>
