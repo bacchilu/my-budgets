@@ -1,6 +1,6 @@
 {
     "name": "my-budgets",
-    "version": "5.5.0",
+    "version": "5.5.1",
     "description": "My Budgets",
     "private": true,
     "source": "src/index.html",
@@ -36,7 +36,7 @@
         "@types/react": "^18.2.7",
         "@types/react-dom": "^18.2.4",
         "npm-check-updates": "^16.10.12",
-        "parcel": "^2.9.0"
+        "parcel": "^2.9.1"
     },
     "dependencies": {
         "firebase": "^9.22.1",
