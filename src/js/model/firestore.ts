@@ -11,7 +11,18 @@
 // }
 
 import firebase from 'firebase/app';
-import {addDoc, collection, doc, getDocs, getFirestore, orderBy, query, setDoc, where} from 'firebase/firestore';
+import {
+    addDoc,
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    orderBy,
+    query,
+    setDoc,
+    where,
+} from 'firebase/firestore';
 import {AppUser} from './auth';
 
 export interface Budget {
@@ -36,9 +47,14 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
                 return {id: item.id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)};
             }) as Budget[];
         },
-        updateBudget: async function (id: string, amount: number, weekly_amount: number) {
+        updateBudget: async (id: string, amount: number, weekly_amount: number) => {
             const budgetsRef = collection(db, 'budgets');
-            await setDoc(doc(budgetsRef, id), {amount: amount, weekly_amount: weekly_amount}, {merge: true});
+            const budgetDocRef = doc(budgetsRef, id);
+
+            await setDoc(budgetDocRef, {amount: amount, weekly_amount: weekly_amount}, {merge: true});
+            const updatedDoc = await getDoc(budgetDocRef);
+            const rawData = updatedDoc.data()!;
+            return {id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)};
         },
         createBudget: async function (user: AppUser, name: string, weekly_budget: number) {
             const docRef = await addDoc(collection(db, 'budgets'), {
