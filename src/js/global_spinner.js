@@ -3,7 +3,7 @@ import React from 'react';
 import {useBudgets} from './budgets';
 
 export const GlobalSpinner = function ({user}) {
-    const {isValidating} = useBudgets(user);
+    const [{isValidating}, _] = useBudgets(user);
 
     if (!isValidating) return null;
     return (
