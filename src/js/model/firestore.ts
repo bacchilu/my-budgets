@@ -54,7 +54,7 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
             await setDoc(budgetDocRef, {amount: amount, weekly_amount: weekly_amount}, {merge: true});
             const updatedDoc = await getDoc(budgetDocRef);
             const rawData = updatedDoc.data()!;
-            return {id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)};
+            return {id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)} as Budget;
         },
         createBudget: async function (user: AppUser, name: string, weekly_budget: number) {
             const docRef = await addDoc(collection(db, 'budgets'), {
