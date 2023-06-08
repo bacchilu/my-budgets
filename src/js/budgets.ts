@@ -39,17 +39,30 @@ export const useBudgets = (user: AppUser) => {
             });
         },
         recharge: async (budget: Budget) => {
-            mutate(
-                (arg) =>
-                    arg!.map((b) =>
-                        budget.id === b.id
-                            ? {...budget, amount: budget.amount + budget.weekly_budget, weekly_amount: 0}
-                            : b
-                    ),
-                false
-            );
-            await updateBudget(budget.id, budget.amount + budget.weekly_budget, 0);
-            mutate();
+            const ub = async function () {
+                const updatedBudget = await updateBudget(budget.id, budget.amount + budget.weekly_budget, 0);
+                return getUpdatedBudgets(updatedBudget);
+            };
+            mutate(ub, {
+                optimisticData: getUpdatedBudgets({
+                    ...budget,
+                    amount: budget.amount + budget.weekly_budget,
+                    weekly_amount: 0,
+                }),
+                revalidate: false,
+                rollbackOnError: true,
+            });
+            // mutate(
+            //     (arg) =>
+            //         arg!.map((b) =>
+            //             budget.id === b.id
+            //                 ? {...budget, amount: budget.amount + budget.weekly_budget, weekly_amount: 0}
+            //                 : b
+            //         ),
+            //     false
+            // );
+            // await updateBudget(budget.id, budget.amount + budget.weekly_budget, 0);
+            // mutate();
         },
         create: async ({name, description, budget}: {name: string; description: string; budget: number}) => {
             mutate(

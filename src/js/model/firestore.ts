@@ -65,7 +65,9 @@ export const FireStore = function (firebaseApp: firebase.FirebaseApp) {
                 weekly_amount: 0,
                 weekly_budget,
             });
-            console.log('Document written with ID: ', docRef.id);
+            const createdDoc = await getDoc(docRef);
+            const rawData = createdDoc.data()!;
+            return {id: createdDoc.id, ...rawData, createdAt: new Date(rawData.createdAt.seconds * 1000)} as Budget;
         },
     };
 };
